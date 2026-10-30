@@ -7,14 +7,18 @@ const OS = "appVRRUkNDx089A4R", JOBS = "appuSXKcNmuc3ifVS", RESEARCH = "tblJpnTe
 const F = { item: "flddhywIVGrrTuBhV", channel: "fldVNNkidpeLaC2t4", source: "fldFLH0otK5OUXzq6", url: "fldW7dPYLbk4QpRi5",
   pub: "fldaDojL4YicGtKvz", summary: "fldhmAsPURyfO8Dc7", score: "fldTdL8XKQSFWlPBO", status: "fld3jZYBc6LX5nSzo", found: "fldsQcZifCe4eUpl1" };
 
+const gn = (q) => `https://news.google.com/rss/search?q=${encodeURIComponent(q + " when:4d")}&hl=en-IN&gl=IN&ceid=IN:en`;
+// [name, url, bonus]. Google News searches are India-specific, so they start with a bonus.
 const FEEDS = [
-  ["Resident Advisor", "https://ra.co/xml/news.xml"],
-  ["Mixmag", "https://mixmag.net/rss.xml"],
-  ["Bandcamp Daily", "https://daily.bandcamp.com/feed"],
-  ["Pitchfork", "https://pitchfork.com/feed/feed-news/rss"],
-  ["DJ Mag", "https://djmag.com/rss.xml"],
-  ["Electronic Beats", "https://www.electronicbeats.net/feed/"],
-  ["Complex Music", "https://www.complex.com/music/rss"],
+  ["Mixmag", "https://mixmag.net/rss.xml", 0],
+  ["DJ Mag", "https://djmag.com/rss.xml", 0],
+  ["Pitchfork", "https://pitchfork.com/feed/feed-news/rss", 0],
+  ["Bandcamp Daily", "https://daily.bandcamp.com/feed", 0],
+  ["News: electronic music India", gn("electronic music India"), 4],
+  ["News: club nights in Indian cities", gn("techno OR house OR disco club night Bengaluru OR Mumbai OR Delhi OR Goa OR Pune"), 4],
+  ["News: DJs touring India", gn("DJ tour India 2027 OR \"India debut\" DJ"), 4],
+  ["News: India festivals", gn("India music festival lineup electronic"), 4],
+  ["News: independent labels and collectives", gn("independent label OR collective India electronic music"), 4],
 ];
 const INDIA = /india|bengaluru|bangalore|mumbai|delhi|goa|pune|hyderabad|kolkata|chennai|indian|sunburn|nh7|magnetic fields|echoes of earth|dekmantel|boiler room india/i;
 const ASIA = /asia|south asia|dubai|singapore|bali|tokyo|seoul|mumbai/i;
@@ -46,10 +50,11 @@ async function create(base, table, rows) {
     if (!r.ok) throw new Error(`airtable write ${r.status}`);
   }
 }
-const strip = (s) => String(s || "").replace(/<!\[CDATA\[|\]\]>/g, "").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&#8217;|&rsquo;/g, "'").replace(/&quot;|&#8220;|&#8221;/g, '"').replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+const decode = (s) => s.replace(/&#(\d+);/g, (_, n) => String.fromCharCode(n)).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)));
+const strip = (s) => decode(String(s || "")).replace(/<!\[CDATA\[|\]\]>/g, "").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&#8217;|&rsquo;/g, "'").replace(/&quot;|&#8220;|&#8221;/g, '"').replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 const tag = (x, t) => { const m = x.match(new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`, "i")); return m ? strip(m[1]) : ""; };
 
-async function readFeed([name, url]) {
+async function readFeed([name, url, bonus]) {
   const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0 paramos" }, signal: AbortSignal.timeout(10000) });
   if (!r.ok) throw new Error(String(r.status));
   const xml = await r.text();
@@ -58,7 +63,7 @@ async function readFeed([name, url]) {
     const link = (b.match(/<link[^>]*href="([^"]+)"/i) || [])[1] || tag(b, "link");
     const d = tag(b, "pubDate") || tag(b, "published") || tag(b, "updated");
     const date = d ? new Date(d) : null;
-    return { source: name, title: tag(b, "title"), url: link, summary: (tag(b, "description") || tag(b, "summary") || tag(b, "content")).slice(0, 600), date: date && !isNaN(date) ? date : null };
+    return { bonus, source: name, title: tag(b, "title"), url: link, summary: (tag(b, "description") || tag(b, "summary") || tag(b, "content")).slice(0, 600), date: date && !isNaN(date) ? date : null };
   }).filter((x) => x.title && x.url);
 }
 
@@ -80,11 +85,11 @@ module.exports = async (req, res) => {
         if (it.date && Date.now() - it.date.getTime() > 4 * 86400e3) continue;
         if (SKIP.test(it.title)) continue;
         const text = it.title + " " + it.summary;
-        let score = 0;
+        let score = it.bonus || 0;
         if (INDIA.test(text)) score += 5;
         else if (ASIA.test(text)) score += 2;
         if (SCENE.test(text)) score += 2;
-        if (score < 2) continue;
+        if (score < 4) continue;
         seen.add(it.url);
         rows.push({ [F.item]: it.title.slice(0, 250), [F.channel]: "CCD", [F.source]: it.source, [F.url]: it.url,
           ...(it.date ? { [F.pub]: it.date.toISOString().slice(0, 10) } : {}), [F.summary]: it.summary, [F.score]: score, [F.status]: "New", [F.found]: D });
@@ -120,6 +125,9 @@ module.exports = async (req, res) => {
       } catch (e) { feedStatus["Job Search"] = "failed " + e.message; }
     }
 
+    rows.sort((a, b) => b[F.score] - a[F.score]);
+    const keep = rows.filter((r) => r[F.channel] !== "CCD").concat(rows.filter((r) => r[F.channel] === "CCD").slice(0, 25));
+    rows.length = 0; rows.push(...keep);
     if (rows.length) await create(OS, RESEARCH, rows);
     const byCh = rows.reduce((a, r) => { a[r[F.channel]] = (a[r[F.channel]] || 0) + 1; return a; }, {});
     const summary = `${rows.length} new research items (${Object.entries(byCh).map(([k, v]) => `${k} ${v}`).join(", ") || "none"}). Feeds: ${Object.entries(feedStatus).map(([k, v]) => `${k} ${v}`).join("; ")}`;
