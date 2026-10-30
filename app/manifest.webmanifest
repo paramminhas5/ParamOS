@@ -1,0 +1,2 @@
+{"name":"Param OS","short_name":"Param OS","description":"One dashboard for every lane of my life","start_url":"/paramos","scope":"/paramos","display":"standalone","background_color":"#0D0F14","theme_color":"#0D0F14",
+"icons":[{"src":"/paramos/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"/paramos/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
