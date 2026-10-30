@@ -113,7 +113,7 @@ async function loadCcd(){
     h+=`<div class="card"><div class="meta"><a href="${esc(j.site)}" target="_blank" rel="noopener">${esc(j.site.replace("https://",""))}</a><span>checked ${ago(j.checked)}</span></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">${j.pages.map(p=>`<span class="status ${p.status===200?"s-ok":"s-warn"}">${esc(p.path)} ${p.status||"down"}</span>`).join("")}</div>
       ${j.staleDate?`<p class="why" style="margin-top:12px">The homepage still shows "Sun, Jun 28, 2026". It needs updating.</p>`:""}</div>`;
-    h+=j.repos.map(rp=>`<div class="card"><div class="meta"><span class="tag ccd">GitHub</span><a href="https://github.com/${esc(rp.repo)}" target="_blank" rel="noopener">${esc(rp.repo)}</a></div>
+    h+=j.repos.map(rp=>`<div class="card"><div class="meta"><span class="tag ccd">GitHub</span><a href="https://github.com/${esc(rp.repo)}/tree/${esc(rp.branch)}" target="_blank" rel="noopener">${esc(rp.repo)} · ${esc(rp.branch)}</a></div>
       ${rp.error?`<p class="hint">${esc(rp.error)}</p>`:""}
       ${rp.prs.length?`<h5>Open pull requests</h5>${rp.prs.map(p=>`<p style="margin:0 0 4px"><a href="${esc(p.url)}" target="_blank" rel="noopener">#${p.n} ${esc(p.title)}</a></p>`).join("")}`:""}
       ${rp.commits.length?`<h5>Recent commits</h5>${rp.commits.map(c=>`<p style="margin:0 0 4px;font-size:13px"><span class="hint">${ago(c.date)}</span> <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.msg)}</a></p>`).join("")}`:""}</div>`).join("");
