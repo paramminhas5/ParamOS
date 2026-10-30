@@ -32,6 +32,12 @@
     },
     "api/needs.js": {
       "includeFiles": "mermanos/**"
+    },
+    "api/agents.js": {
+      "maxDuration": 30
+    },
+    "api/ccd-live.js": {
+      "maxDuration": 30
     }
   },
   "crons": [
