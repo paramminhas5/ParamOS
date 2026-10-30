@@ -1,0 +1,1239 @@
+{
+ "schema": 1,
+ "lane": "merman",
+ "generated": "2026-10-30T08:37:09+0000",
+ "date": "2026-10-30",
+ "headline": {
+  "sets_touched_30d": 6,
+  "finds_waiting": 60,
+  "lossy_files": 2212,
+  "latest_project": "MiradorMorning",
+  "latest_bpm": 95.0,
+  "days_since_last_session": 0
+ },
+ "today": {
+  "listen": [
+   {
+    "recent": true,
+    "id": 1,
+    "artist": "AFIN",
+    "release": "Give Me Tonight",
+    "year": "2023",
+    "label": "Frank Music",
+    "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+    "links": {
+     "bandcamp": "https://bandcamp.com/search?q=AFIN%20Give%20Me%20Tonight",
+     "discogs": "https://www.discogs.com/search/?q=AFIN%20Give%20Me%20Tonight",
+     "beatport": "https://www.beatport.com/search?q=AFIN%20Give%20Me%20Tonight"
+    }
+   },
+   {
+    "recent": true,
+    "id": 2,
+    "artist": "Hey Cabrera!",
+    "release": "The Moment",
+    "year": "2024",
+    "label": "Frank Music",
+    "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+    "links": {
+     "bandcamp": "https://bandcamp.com/search?q=Hey%20Cabrera%21%20The%20Moment",
+     "discogs": "https://www.discogs.com/search/?q=Hey%20Cabrera%21%20The%20Moment",
+     "beatport": "https://www.beatport.com/search?q=Hey%20Cabrera%21%20The%20Moment"
+    }
+   },
+   {
+    "recent": true,
+    "id": 3,
+    "artist": "Dompe",
+    "release": "More Lemon, Pleeease!",
+    "year": "2026",
+    "label": "Frank Music",
+    "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+    "links": {
+     "bandcamp": "https://bandcamp.com/search?q=Dompe%20More%20Lemon%2C%20Pleeease%21",
+     "discogs": "https://www.discogs.com/search/?q=Dompe%20More%20Lemon%2C%20Pleeease%21",
+     "beatport": "https://www.beatport.com/search?q=Dompe%20More%20Lemon%2C%20Pleeease%21"
+    }
+   },
+   {
+    "recent": false,
+    "id": 8,
+    "artist": "Harissa",
+    "release": "R-da",
+    "year": "1999",
+    "label": "Different Recordings",
+    "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+    "links": {
+     "bandcamp": "https://bandcamp.com/search?q=Harissa%20R-da",
+     "discogs": "https://www.discogs.com/search/?q=Harissa%20R-da",
+     "beatport": "https://www.beatport.com/search?q=Harissa%20R-da"
+    }
+   },
+   {
+    "recent": false,
+    "id": 9,
+    "artist": "Miela",
+    "release": "Identification Unknown",
+    "year": "2020",
+    "label": "Frank Music",
+    "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+    "links": {
+     "bandcamp": "https://bandcamp.com/search?q=Miela%20Identification%20Unknown",
+     "discogs": "https://www.discogs.com/search/?q=Miela%20Identification%20Unknown",
+     "beatport": "https://www.beatport.com/search?q=Miela%20Identification%20Unknown"
+    }
+   }
+  ],
+  "talk": [
+   {
+    "topic": "Frank Music",
+    "prompt": "3 of today's finds are on Frank Music. What do they share, and which one would you play out?"
+   },
+   {
+    "topic": "MiradorMorning at 95 bpm",
+    "prompt": "Your newest set is at 95 bpm, your recent ones sit around 121. What made you move?"
+   },
+   {
+    "topic": "Punjabi Peggy",
+    "prompt": "Punjabi Peggy has 23 tracks and 263 clips. Play 15 seconds of the part you are proudest of and say why."
+   },
+   {
+    "topic": "AFIN",
+    "prompt": "Top find today is AFIN, Give Me Tonight. One thing about it that you would steal."
+   }
+  ],
+  "check_out": [
+   {
+    "label": "Cajual Records",
+    "finds": 12
+   },
+   {
+    "label": "Glasgow Underground",
+    "finds": 12
+   },
+   {
+    "label": "Different Recordings",
+    "finds": 11
+   },
+   {
+    "label": "Frank Music",
+    "finds": 7
+   }
+  ],
+  "working_on": [
+   {
+    "file": "MiradorMorning3.als",
+    "project": "MiradorMorning",
+    "bpm": 95.0,
+    "tracks": 37,
+    "clips": 199,
+    "date": "2026-10-29",
+    "days_ago": 0,
+    "bounces": 0
+   },
+   {
+    "file": "FARKANOYA.als",
+    "project": "FARKANOYA",
+    "bpm": 120.0,
+    "tracks": 29,
+    "clips": 59,
+    "date": "2026-10-28",
+    "days_ago": 1,
+    "bounces": 0
+   },
+   {
+    "file": "realsong1prog.als",
+    "project": "realsong1",
+    "bpm": 120.0,
+    "tracks": 13,
+    "clips": 132,
+    "date": "2026-10-24",
+    "days_ago": 5,
+    "bounces": 0
+   }
+  ]
+ },
+ "studio": [
+  {
+   "file": "MiradorMorning3.als",
+   "project": "MiradorMorning",
+   "bpm": 95.0,
+   "tracks": 37,
+   "clips": 199,
+   "date": "2026-10-29",
+   "days_ago": 0,
+   "bounces": 0
+  },
+  {
+   "file": "FARKANOYA.als",
+   "project": "FARKANOYA",
+   "bpm": 120.0,
+   "tracks": 29,
+   "clips": 59,
+   "date": "2026-10-28",
+   "days_ago": 1,
+   "bounces": 0
+  },
+  {
+   "file": "realsong1prog.als",
+   "project": "realsong1",
+   "bpm": 120.0,
+   "tracks": 13,
+   "clips": 132,
+   "date": "2026-10-24",
+   "days_ago": 5,
+   "bounces": 0
+  },
+  {
+   "file": "aislop1.als",
+   "project": "mogambo",
+   "bpm": 125.0,
+   "tracks": 22,
+   "clips": 237,
+   "date": "2026-10-22",
+   "days_ago": 7,
+   "bounces": 0
+  },
+  {
+   "file": "Punjabi Peggy .als",
+   "project": "Punjabi Peggy",
+   "bpm": 131.0,
+   "tracks": 23,
+   "clips": 263,
+   "date": "2026-10-21",
+   "days_ago": 9,
+   "bounces": 0
+  },
+  {
+   "file": "Untitled.als",
+   "project": "Frkatourejam",
+   "bpm": 121.0,
+   "tracks": 10,
+   "clips": 20,
+   "date": "2026-10-17",
+   "days_ago": 12,
+   "bounces": 0
+  },
+  {
+   "file": "dubadubdub.als",
+   "project": "jam5als",
+   "bpm": 146.0,
+   "tracks": 13,
+   "clips": 42,
+   "date": "2026-09-03",
+   "days_ago": 56,
+   "bounces": 0
+  },
+  {
+   "file": "jam4.als",
+   "project": "jam4",
+   "bpm": 132.0,
+   "tracks": 5,
+   "clips": 47,
+   "date": "2026-08-16",
+   "days_ago": 75,
+   "bounces": 0
+  },
+  {
+   "file": "Untitled.als",
+   "project": "jam3",
+   "bpm": 131.0,
+   "tracks": 14,
+   "clips": 76,
+   "date": "2026-08-16",
+   "days_ago": 75,
+   "bounces": 0
+  },
+  {
+   "file": "jam2.als",
+   "project": "jam2",
+   "bpm": 122.0,
+   "tracks": 30,
+   "clips": 38,
+   "date": "2026-08-12",
+   "days_ago": 78,
+   "bounces": 0
+  },
+  {
+   "file": "Jam1.als",
+   "project": "Jam1",
+   "bpm": 132.0,
+   "tracks": 12,
+   "clips": 22,
+   "date": "2026-08-12",
+   "days_ago": 79,
+   "bounces": 0
+  },
+  {
+   "file": "Cyclone song 4-4demoalt-10july26Shantam+Paramedit .als",
+   "project": "drum",
+   "bpm": 119.0,
+   "tracks": 30,
+   "clips": 433,
+   "date": "2026-07-12",
+   "days_ago": 109,
+   "bounces": 0
+  }
+ ],
+ "discovery": [
+  {
+   "recent": true,
+   "id": 1,
+   "artist": "AFIN",
+   "release": "Give Me Tonight",
+   "year": "2023",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=AFIN%20Give%20Me%20Tonight",
+    "discogs": "https://www.discogs.com/search/?q=AFIN%20Give%20Me%20Tonight",
+    "beatport": "https://www.beatport.com/search?q=AFIN%20Give%20Me%20Tonight"
+   }
+  },
+  {
+   "recent": false,
+   "id": 8,
+   "artist": "Harissa",
+   "release": "R-da",
+   "year": "1999",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Harissa%20R-da",
+    "discogs": "https://www.discogs.com/search/?q=Harissa%20R-da",
+    "beatport": "https://www.beatport.com/search?q=Harissa%20R-da"
+   }
+  },
+  {
+   "recent": false,
+   "id": 9,
+   "artist": "Miela",
+   "release": "Identification Unknown",
+   "year": "2020",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Miela%20Identification%20Unknown",
+    "discogs": "https://www.discogs.com/search/?q=Miela%20Identification%20Unknown",
+    "beatport": "https://www.beatport.com/search?q=Miela%20Identification%20Unknown"
+   }
+  },
+  {
+   "recent": false,
+   "id": 10,
+   "artist": "Bon Voyage",
+   "release": "Booshie",
+   "year": "2015",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Bon%20Voyage%20Booshie",
+    "discogs": "https://www.discogs.com/search/?q=Bon%20Voyage%20Booshie",
+    "beatport": "https://www.beatport.com/search?q=Bon%20Voyage%20Booshie"
+   }
+  },
+  {
+   "recent": true,
+   "id": 2,
+   "artist": "Hey Cabrera!",
+   "release": "The Moment",
+   "year": "2024",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Hey%20Cabrera%21%20The%20Moment",
+    "discogs": "https://www.discogs.com/search/?q=Hey%20Cabrera%21%20The%20Moment",
+    "beatport": "https://www.beatport.com/search?q=Hey%20Cabrera%21%20The%20Moment"
+   }
+  },
+  {
+   "recent": false,
+   "id": 11,
+   "artist": "Ch\u00e2teau Lamotte",
+   "release": "Glory Me",
+   "year": "1999",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Ch%C3%A2teau%20Lamotte%20Glory%20Me",
+    "discogs": "https://www.discogs.com/search/?q=Ch%C3%A2teau%20Lamotte%20Glory%20Me",
+    "beatport": "https://www.beatport.com/search?q=Ch%C3%A2teau%20Lamotte%20Glory%20Me"
+   }
+  },
+  {
+   "recent": false,
+   "id": 12,
+   "artist": "Jerome Mikulich",
+   "release": "Bop Drop",
+   "year": "1994",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Jerome%20Mikulich%20Bop%20Drop",
+    "discogs": "https://www.discogs.com/search/?q=Jerome%20Mikulich%20Bop%20Drop",
+    "beatport": "https://www.beatport.com/search?q=Jerome%20Mikulich%20Bop%20Drop"
+   }
+  },
+  {
+   "recent": false,
+   "id": 13,
+   "artist": "Brothers in the Struggle",
+   "release": "A Little Bit of This, a Little Bit of That",
+   "year": "1994",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Brothers%20in%20the%20Struggle%20A%20Little%20Bit%20of%20This%2C%20a%20Little%20Bit%20of%20That",
+    "discogs": "https://www.discogs.com/search/?q=Brothers%20in%20the%20Struggle%20A%20Little%20Bit%20of%20This%2C%20a%20Little%20Bit%20of%20That",
+    "beatport": "https://www.beatport.com/search?q=Brothers%20in%20the%20Struggle%20A%20Little%20Bit%20of%20This%2C%20a%20Little%20Bit%20of%20That"
+   }
+  },
+  {
+   "recent": false,
+   "id": 14,
+   "artist": "DJ Predator",
+   "release": "Clap Ya Handz / Funky Flava",
+   "year": "1999",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=DJ%20Predator%20Clap%20Ya%20Handz%20/%20Funky%20Flava",
+    "discogs": "https://www.discogs.com/search/?q=DJ%20Predator%20Clap%20Ya%20Handz%20/%20Funky%20Flava",
+    "beatport": "https://www.beatport.com/search?q=DJ%20Predator%20Clap%20Ya%20Handz%20/%20Funky%20Flava"
+   }
+  },
+  {
+   "recent": false,
+   "id": 15,
+   "artist": "G-Ha",
+   "release": "Skansen Music",
+   "year": "2001",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=G-Ha%20Skansen%20Music",
+    "discogs": "https://www.discogs.com/search/?q=G-Ha%20Skansen%20Music",
+    "beatport": "https://www.beatport.com/search?q=G-Ha%20Skansen%20Music"
+   }
+  },
+  {
+   "recent": false,
+   "id": 16,
+   "artist": "Modem",
+   "release": "Wannado",
+   "year": "2002",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Modem%20Wannado",
+    "discogs": "https://www.discogs.com/search/?q=Modem%20Wannado",
+    "beatport": "https://www.beatport.com/search?q=Modem%20Wannado"
+   }
+  },
+  {
+   "recent": true,
+   "id": 3,
+   "artist": "Dompe",
+   "release": "More Lemon, Pleeease!",
+   "year": "2026",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Dompe%20More%20Lemon%2C%20Pleeease%21",
+    "discogs": "https://www.discogs.com/search/?q=Dompe%20More%20Lemon%2C%20Pleeease%21",
+    "beatport": "https://www.beatport.com/search?q=Dompe%20More%20Lemon%2C%20Pleeease%21"
+   }
+  },
+  {
+   "recent": false,
+   "id": 17,
+   "artist": "Origins Sound",
+   "release": "Chronic Tronic",
+   "year": "2014",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Origins%20Sound%20Chronic%20Tronic",
+    "discogs": "https://www.discogs.com/search/?q=Origins%20Sound%20Chronic%20Tronic",
+    "beatport": "https://www.beatport.com/search?q=Origins%20Sound%20Chronic%20Tronic"
+   }
+  },
+  {
+   "recent": false,
+   "id": 18,
+   "artist": "The Congregation",
+   "release": "Be Grateful",
+   "year": "1997",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=The%20Congregation%20Be%20Grateful",
+    "discogs": "https://www.discogs.com/search/?q=The%20Congregation%20Be%20Grateful",
+    "beatport": "https://www.beatport.com/search?q=The%20Congregation%20Be%20Grateful"
+   }
+  },
+  {
+   "recent": false,
+   "id": 19,
+   "artist": "Kevin Kind",
+   "release": "Moment In Time EP",
+   "year": "2013",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Kevin%20Kind%20Moment%20In%20Time%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Kevin%20Kind%20Moment%20In%20Time%20EP",
+    "beatport": "https://www.beatport.com/search?q=Kevin%20Kind%20Moment%20In%20Time%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 20,
+   "artist": "Achterbahn D'Amour",
+   "release": "Frank Music 03",
+   "year": "2012",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Achterbahn%20D%27Amour%20Frank%20Music%2003",
+    "discogs": "https://www.discogs.com/search/?q=Achterbahn%20D%27Amour%20Frank%20Music%2003",
+    "beatport": "https://www.beatport.com/search?q=Achterbahn%20D%27Amour%20Frank%20Music%2003"
+   }
+  },
+  {
+   "recent": false,
+   "id": 21,
+   "artist": "Alex Mart\u00edn Ensemble",
+   "release": "Join the Band!",
+   "year": "1998",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Alex%20Mart%C3%ADn%20Ensemble%20Join%20the%20Band%21",
+    "discogs": "https://www.discogs.com/search/?q=Alex%20Mart%C3%ADn%20Ensemble%20Join%20the%20Band%21",
+    "beatport": "https://www.beatport.com/search?q=Alex%20Mart%C3%ADn%20Ensemble%20Join%20the%20Band%21"
+   }
+  },
+  {
+   "recent": false,
+   "id": 22,
+   "artist": "Naida",
+   "release": "Do You Think You Can Love Me",
+   "year": "1998",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Naida%20Do%20You%20Think%20You%20Can%20Love%20Me",
+    "discogs": "https://www.discogs.com/search/?q=Naida%20Do%20You%20Think%20You%20Can%20Love%20Me",
+    "beatport": "https://www.beatport.com/search?q=Naida%20Do%20You%20Think%20You%20Can%20Love%20Me"
+   }
+  },
+  {
+   "recent": false,
+   "id": 23,
+   "artist": "Studio Blue",
+   "release": "Cantina Scene",
+   "year": "1997",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Studio%20Blue%20Cantina%20Scene",
+    "discogs": "https://www.discogs.com/search/?q=Studio%20Blue%20Cantina%20Scene",
+    "beatport": "https://www.beatport.com/search?q=Studio%20Blue%20Cantina%20Scene"
+   }
+  },
+  {
+   "recent": false,
+   "id": 24,
+   "artist": "Second-Hand Soul",
+   "release": "Summer Nights EP",
+   "year": "1998",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Second-Hand%20Soul%20Summer%20Nights%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Second-Hand%20Soul%20Summer%20Nights%20EP",
+    "beatport": "https://www.beatport.com/search?q=Second-Hand%20Soul%20Summer%20Nights%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 25,
+   "artist": "Dope Dog",
+   "release": "Keep House Unda\u2019Ground (2015 Remixes)",
+   "year": "2015",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Dope%20Dog%20Keep%20House%20Unda%E2%80%99Ground%20%282015%20Remixes%29",
+    "discogs": "https://www.discogs.com/search/?q=Dope%20Dog%20Keep%20House%20Unda%E2%80%99Ground%20%282015%20Remixes%29",
+    "beatport": "https://www.beatport.com/search?q=Dope%20Dog%20Keep%20House%20Unda%E2%80%99Ground%20%282015%20Remixes%29"
+   }
+  },
+  {
+   "recent": false,
+   "id": 26,
+   "artist": "Xitsonga Dance",
+   "release": "Heke Heke / Hoza",
+   "year": "2013",
+   "label": "Jiaolong",
+   "why": "on Jiaolong (54 releases), the same label as Daphni, Caribou",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Xitsonga%20Dance%20Heke%20Heke%20/%20Hoza",
+    "discogs": "https://www.discogs.com/search/?q=Xitsonga%20Dance%20Heke%20Heke%20/%20Hoza",
+    "beatport": "https://www.beatport.com/search?q=Xitsonga%20Dance%20Heke%20Heke%20/%20Hoza"
+   }
+  },
+  {
+   "recent": false,
+   "id": 27,
+   "artist": "Charles Long",
+   "release": "Music for the Amorphous Body Study Center",
+   "year": "1995",
+   "label": "Duophonic",
+   "why": "on Duophonic (113 releases), the same label as Stereolab",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Charles%20Long%20Music%20for%20the%20Amorphous%20Body%20Study%20Center",
+    "discogs": "https://www.discogs.com/search/?q=Charles%20Long%20Music%20for%20the%20Amorphous%20Body%20Study%20Center",
+    "beatport": "https://www.beatport.com/search?q=Charles%20Long%20Music%20for%20the%20Amorphous%20Body%20Study%20Center"
+   }
+  },
+  {
+   "recent": false,
+   "id": 28,
+   "artist": "Javi Lopez",
+   "release": "Party With Us EP",
+   "year": "2016",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Javi%20Lopez%20Party%20With%20Us%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Javi%20Lopez%20Party%20With%20Us%20EP",
+    "beatport": "https://www.beatport.com/search?q=Javi%20Lopez%20Party%20With%20Us%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 29,
+   "artist": "Cassio",
+   "release": "Baby Love",
+   "year": "1998",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Cassio%20Baby%20Love",
+    "discogs": "https://www.discogs.com/search/?q=Cassio%20Baby%20Love",
+    "beatport": "https://www.beatport.com/search?q=Cassio%20Baby%20Love"
+   }
+  },
+  {
+   "recent": false,
+   "id": 30,
+   "artist": "Bodden",
+   "release": "I Can\u2019t Feel",
+   "year": "2015",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Bodden%20I%20Can%E2%80%99t%20Feel",
+    "discogs": "https://www.discogs.com/search/?q=Bodden%20I%20Can%E2%80%99t%20Feel",
+    "beatport": "https://www.beatport.com/search?q=Bodden%20I%20Can%E2%80%99t%20Feel"
+   }
+  },
+  {
+   "recent": false,
+   "id": 31,
+   "artist": "Dana",
+   "release": "Do Me a Favor",
+   "year": "1996",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Dana%20Do%20Me%20a%20Favor",
+    "discogs": "https://www.discogs.com/search/?q=Dana%20Do%20Me%20a%20Favor",
+    "beatport": "https://www.beatport.com/search?q=Dana%20Do%20Me%20a%20Favor"
+   }
+  },
+  {
+   "recent": false,
+   "id": 32,
+   "artist": "Cabrini-Greens & Cornbread",
+   "release": "Cabrini-Greens & Cornbread",
+   "year": "1997",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Cabrini-Greens%20%26%20Cornbread%20Cabrini-Greens%20%26%20Cornbread",
+    "discogs": "https://www.discogs.com/search/?q=Cabrini-Greens%20%26%20Cornbread%20Cabrini-Greens%20%26%20Cornbread",
+    "beatport": "https://www.beatport.com/search?q=Cabrini-Greens%20%26%20Cornbread%20Cabrini-Greens%20%26%20Cornbread"
+   }
+  },
+  {
+   "recent": false,
+   "id": 33,
+   "artist": "Sam Dexter",
+   "release": "Share A Little Ecstasy (Remixes)",
+   "year": "2019",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Sam%20Dexter%20Share%20A%20Little%20Ecstasy%20%28Remixes%29",
+    "discogs": "https://www.discogs.com/search/?q=Sam%20Dexter%20Share%20A%20Little%20Ecstasy%20%28Remixes%29",
+    "beatport": "https://www.beatport.com/search?q=Sam%20Dexter%20Share%20A%20Little%20Ecstasy%20%28Remixes%29"
+   }
+  },
+  {
+   "recent": false,
+   "id": 34,
+   "artist": "Avante Black",
+   "release": "Make a Mess",
+   "year": "2017",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Avante%20Black%20Make%20a%20Mess",
+    "discogs": "https://www.discogs.com/search/?q=Avante%20Black%20Make%20a%20Mess",
+    "beatport": "https://www.beatport.com/search?q=Avante%20Black%20Make%20a%20Mess"
+   }
+  },
+  {
+   "recent": false,
+   "id": 35,
+   "artist": "Moon Man",
+   "release": "Big Fat Woman",
+   "year": "1997",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Moon%20Man%20Big%20Fat%20Woman",
+    "discogs": "https://www.discogs.com/search/?q=Moon%20Man%20Big%20Fat%20Woman",
+    "beatport": "https://www.beatport.com/search?q=Moon%20Man%20Big%20Fat%20Woman"
+   }
+  },
+  {
+   "recent": false,
+   "id": 36,
+   "artist": "Spencer Kincy",
+   "release": "Tangled Thoughts, Volume I",
+   "year": "1994",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Spencer%20Kincy%20Tangled%20Thoughts%2C%20Volume%20I",
+    "discogs": "https://www.discogs.com/search/?q=Spencer%20Kincy%20Tangled%20Thoughts%2C%20Volume%20I",
+    "beatport": "https://www.beatport.com/search?q=Spencer%20Kincy%20Tangled%20Thoughts%2C%20Volume%20I"
+   }
+  },
+  {
+   "recent": false,
+   "id": 37,
+   "artist": "Hard Corey",
+   "release": "Underground Goodie Mixes",
+   "year": "1993",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Hard%20Corey%20Underground%20Goodie%20Mixes",
+    "discogs": "https://www.discogs.com/search/?q=Hard%20Corey%20Underground%20Goodie%20Mixes",
+    "beatport": "https://www.beatport.com/search?q=Hard%20Corey%20Underground%20Goodie%20Mixes"
+   }
+  },
+  {
+   "recent": false,
+   "id": 38,
+   "artist": "Innerspace Orchestra",
+   "release": "One Way Glass",
+   "year": "2016",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Innerspace%20Orchestra%20One%20Way%20Glass",
+    "discogs": "https://www.discogs.com/search/?q=Innerspace%20Orchestra%20One%20Way%20Glass",
+    "beatport": "https://www.beatport.com/search?q=Innerspace%20Orchestra%20One%20Way%20Glass"
+   }
+  },
+  {
+   "recent": false,
+   "id": 39,
+   "artist": "Clear Spot",
+   "release": "Moonman Bop",
+   "year": "1998",
+   "label": "Duophonic",
+   "why": "on Duophonic (113 releases), the same label as Stereolab",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Clear%20Spot%20Moonman%20Bop",
+    "discogs": "https://www.discogs.com/search/?q=Clear%20Spot%20Moonman%20Bop",
+    "beatport": "https://www.beatport.com/search?q=Clear%20Spot%20Moonman%20Bop"
+   }
+  },
+  {
+   "recent": false,
+   "id": 40,
+   "artist": "Spencer K",
+   "release": "Basic Tricks",
+   "year": "2014",
+   "label": "Glasgow Underground",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Spencer%20K%20Basic%20Tricks",
+    "discogs": "https://www.discogs.com/search/?q=Spencer%20K%20Basic%20Tricks",
+    "beatport": "https://www.beatport.com/search?q=Spencer%20K%20Basic%20Tricks"
+   }
+  },
+  {
+   "recent": false,
+   "id": 41,
+   "artist": "Syap",
+   "release": "Good Stuff EP",
+   "year": "2017",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Syap%20Good%20Stuff%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Syap%20Good%20Stuff%20EP",
+    "beatport": "https://www.beatport.com/search?q=Syap%20Good%20Stuff%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 42,
+   "artist": "David Jackson",
+   "release": "Broken Heart",
+   "year": "2019",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=David%20Jackson%20Broken%20Heart",
+    "discogs": "https://www.discogs.com/search/?q=David%20Jackson%20Broken%20Heart",
+    "beatport": "https://www.beatport.com/search?q=David%20Jackson%20Broken%20Heart"
+   }
+  },
+  {
+   "recent": false,
+   "id": 43,
+   "artist": "DNKL",
+   "release": "Draft",
+   "year": "2017",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=DNKL%20Draft",
+    "discogs": "https://www.discogs.com/search/?q=DNKL%20Draft",
+    "beatport": "https://www.beatport.com/search?q=DNKL%20Draft"
+   }
+  },
+  {
+   "recent": false,
+   "id": 44,
+   "artist": "Dakar",
+   "release": "Move",
+   "year": "2017",
+   "label": "Cajual Records",
+   "why": "on Cajual Records (148 releases), the same label as Cajmere",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Dakar%20Move",
+    "discogs": "https://www.discogs.com/search/?q=Dakar%20Move",
+    "beatport": "https://www.beatport.com/search?q=Dakar%20Move"
+   }
+  },
+  {
+   "recent": false,
+   "id": 45,
+   "artist": "Borys",
+   "release": "God Told Me To EP",
+   "year": "2013",
+   "label": "Jiaolong",
+   "why": "on Jiaolong (54 releases), the same label as Daphni, Caribou",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Borys%20God%20Told%20Me%20To%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Borys%20God%20Told%20Me%20To%20EP",
+    "beatport": "https://www.beatport.com/search?q=Borys%20God%20Told%20Me%20To%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 4,
+   "artist": "Iron Curtis",
+   "release": "Moon II",
+   "year": "2020",
+   "label": "Frank Music",
+   "why": "on Frank Music (67 releases), the same label as Biesmans, Johannes Albert",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Iron%20Curtis%20Moon%20II",
+    "discogs": "https://www.discogs.com/search/?q=Iron%20Curtis%20Moon%20II",
+    "beatport": "https://www.beatport.com/search?q=Iron%20Curtis%20Moon%20II"
+   }
+  },
+  {
+   "recent": false,
+   "id": 46,
+   "artist": "Super Discount",
+   "release": "Le patron est devenu fou ! (The Boss Has Gone Mad!) Remixes",
+   "year": "1997",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Super%20Discount%20Le%20patron%20est%20devenu%20fou%20%21%20%28The%20Boss%20Has%20Gone%20Mad%21%29%20Remixes",
+    "discogs": "https://www.discogs.com/search/?q=Super%20Discount%20Le%20patron%20est%20devenu%20fou%20%21%20%28The%20Boss%20Has%20Gone%20Mad%21%29%20Remixes",
+    "beatport": "https://www.beatport.com/search?q=Super%20Discount%20Le%20patron%20est%20devenu%20fou%20%21%20%28The%20Boss%20Has%20Gone%20Mad%21%29%20Remixes"
+   }
+  },
+  {
+   "recent": true,
+   "id": 47,
+   "artist": "Mateo Dufour",
+   "release": "Break It Up",
+   "year": "2026",
+   "label": "GETTRAUM",
+   "why": "on GETTRAUM (14 releases), the same label as Traumer",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Mateo%20Dufour%20Break%20It%20Up",
+    "discogs": "https://www.discogs.com/search/?q=Mateo%20Dufour%20Break%20It%20Up",
+    "beatport": "https://www.beatport.com/search?q=Mateo%20Dufour%20Break%20It%20Up"
+   }
+  },
+  {
+   "recent": false,
+   "id": 48,
+   "artist": "Peo De Pitte",
+   "release": "Big Knobbler",
+   "year": "2012",
+   "label": "Rising Music",
+   "why": "on Rising Music (65 releases), the same label as Chris Lake",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Peo%20De%20Pitte%20Big%20Knobbler",
+    "discogs": "https://www.discogs.com/search/?q=Peo%20De%20Pitte%20Big%20Knobbler",
+    "beatport": "https://www.beatport.com/search?q=Peo%20De%20Pitte%20Big%20Knobbler"
+   }
+  },
+  {
+   "recent": false,
+   "id": 49,
+   "artist": "Abstraxion",
+   "release": "Jus Acid",
+   "year": "2011",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Abstraxion%20Jus%20Acid",
+    "discogs": "https://www.discogs.com/search/?q=Abstraxion%20Jus%20Acid",
+    "beatport": "https://www.beatport.com/search?q=Abstraxion%20Jus%20Acid"
+   }
+  },
+  {
+   "recent": false,
+   "id": 50,
+   "artist": "DBFC",
+   "release": "Jenks",
+   "year": "2017",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=DBFC%20Jenks",
+    "discogs": "https://www.discogs.com/search/?q=DBFC%20Jenks",
+    "beatport": "https://www.beatport.com/search?q=DBFC%20Jenks"
+   }
+  },
+  {
+   "recent": false,
+   "id": 51,
+   "artist": "Nelski",
+   "release": "Minimal Life",
+   "year": "2010",
+   "label": "Rising Music",
+   "why": "on Rising Music (65 releases), the same label as Chris Lake",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Nelski%20Minimal%20Life",
+    "discogs": "https://www.discogs.com/search/?q=Nelski%20Minimal%20Life",
+    "beatport": "https://www.beatport.com/search?q=Nelski%20Minimal%20Life"
+   }
+  },
+  {
+   "recent": true,
+   "id": 52,
+   "artist": "Bluff",
+   "release": "Doin A Lot",
+   "year": "2025",
+   "label": "Bluku Music",
+   "why": "on Bluku Music (14 releases), the same label as Kano, D Double E",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Bluff%20Doin%20A%20Lot",
+    "discogs": "https://www.discogs.com/search/?q=Bluff%20Doin%20A%20Lot",
+    "beatport": "https://www.beatport.com/search?q=Bluff%20Doin%20A%20Lot"
+   }
+  },
+  {
+   "recent": false,
+   "id": 53,
+   "artist": "Jim Breese",
+   "release": "Baila",
+   "year": "2012",
+   "label": "Rising Music",
+   "why": "on Rising Music (65 releases), the same label as Chris Lake",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Jim%20Breese%20Baila",
+    "discogs": "https://www.discogs.com/search/?q=Jim%20Breese%20Baila",
+    "beatport": "https://www.beatport.com/search?q=Jim%20Breese%20Baila"
+   }
+  },
+  {
+   "recent": false,
+   "id": 54,
+   "artist": "Herzfeld",
+   "release": "Two Mothers",
+   "year": "1993",
+   "label": "Duophonic",
+   "why": "on Duophonic (113 releases), the same label as Stereolab",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Herzfeld%20Two%20Mothers",
+    "discogs": "https://www.discogs.com/search/?q=Herzfeld%20Two%20Mothers",
+    "beatport": "https://www.beatport.com/search?q=Herzfeld%20Two%20Mothers"
+   }
+  },
+  {
+   "recent": false,
+   "id": 55,
+   "artist": "Jeremy Greenspan",
+   "release": "Crown Princess / Guu",
+   "year": "2012",
+   "label": "Jiaolong",
+   "why": "on Jiaolong (54 releases), the same label as Daphni, Caribou",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Jeremy%20Greenspan%20Crown%20Princess%20/%20Guu",
+    "discogs": "https://www.discogs.com/search/?q=Jeremy%20Greenspan%20Crown%20Princess%20/%20Guu",
+    "beatport": "https://www.beatport.com/search?q=Jeremy%20Greenspan%20Crown%20Princess%20/%20Guu"
+   }
+  },
+  {
+   "recent": false,
+   "id": 56,
+   "artist": "Kev Hopper",
+   "release": "Whispering Foils",
+   "year": "2000",
+   "label": "Duophonic",
+   "why": "on Duophonic (113 releases), the same label as Stereolab",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Kev%20Hopper%20Whispering%20Foils",
+    "discogs": "https://www.discogs.com/search/?q=Kev%20Hopper%20Whispering%20Foils",
+    "beatport": "https://www.beatport.com/search?q=Kev%20Hopper%20Whispering%20Foils"
+   }
+  },
+  {
+   "recent": false,
+   "id": 57,
+   "artist": "Pavel Petrov",
+   "release": "Shir Khan presents Black Jukebox 07",
+   "year": "2013",
+   "label": "Exploited",
+   "why": "on Glasgow Underground (323 releases), the same label as Kevin McKay",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Pavel%20Petrov%20Shir%20Khan%20presents%20Black%20Jukebox%2007",
+    "discogs": "https://www.discogs.com/search/?q=Pavel%20Petrov%20Shir%20Khan%20presents%20Black%20Jukebox%2007",
+    "beatport": "https://www.beatport.com/search?q=Pavel%20Petrov%20Shir%20Khan%20presents%20Black%20Jukebox%2007"
+   }
+  },
+  {
+   "recent": false,
+   "id": 58,
+   "artist": "JAW",
+   "release": "No Eyes",
+   "year": "2013",
+   "label": "Exploited",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=JAW%20No%20Eyes",
+    "discogs": "https://www.discogs.com/search/?q=JAW%20No%20Eyes",
+    "beatport": "https://www.beatport.com/search?q=JAW%20No%20Eyes"
+   }
+  },
+  {
+   "recent": false,
+   "id": 5,
+   "artist": "Altrice",
+   "release": "bda creature",
+   "year": "2022",
+   "label": "Jiaolong",
+   "why": "on Jiaolong (54 releases), the same label as Daphni, Caribou",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Altrice%20bda%20creature",
+    "discogs": "https://www.discogs.com/search/?q=Altrice%20bda%20creature",
+    "beatport": "https://www.beatport.com/search?q=Altrice%20bda%20creature"
+   }
+  },
+  {
+   "recent": false,
+   "id": 59,
+   "artist": "Playmode",
+   "release": "The Four Feet High EP",
+   "year": "2010",
+   "label": "Sweat It Out!",
+   "why": "on Sweat It Out! (313 releases), the same label as Purple Disco Machine, Bru-C",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Playmode%20The%20Four%20Feet%20High%20EP",
+    "discogs": "https://www.discogs.com/search/?q=Playmode%20The%20Four%20Feet%20High%20EP",
+    "beatport": "https://www.beatport.com/search?q=Playmode%20The%20Four%20Feet%20High%20EP"
+   }
+  },
+  {
+   "recent": false,
+   "id": 60,
+   "artist": "Caseno",
+   "release": "Sebastian",
+   "year": "2013",
+   "label": "Sweat It Out!",
+   "why": "on Sweat It Out! (313 releases), the same label as Purple Disco Machine, Bru-C",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Caseno%20Sebastian",
+    "discogs": "https://www.discogs.com/search/?q=Caseno%20Sebastian",
+    "beatport": "https://www.beatport.com/search?q=Caseno%20Sebastian"
+   }
+  },
+  {
+   "recent": false,
+   "id": 61,
+   "artist": "Gajek",
+   "release": "Restless Shapes",
+   "year": "2014",
+   "label": "Monkeytown Records",
+   "why": "on Monkeytown Records (254 releases), the same label as Modeselektor",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Gajek%20Restless%20Shapes",
+    "discogs": "https://www.discogs.com/search/?q=Gajek%20Restless%20Shapes",
+    "beatport": "https://www.beatport.com/search?q=Gajek%20Restless%20Shapes"
+   }
+  },
+  {
+   "recent": false,
+   "id": 62,
+   "artist": "Boom Bass",
+   "release": "Bit Torrent / Limewire",
+   "year": "2004",
+   "label": "Different Recordings",
+   "why": "on Different Recordings (283 releases), the same label as Claptone, Mylo",
+   "links": {
+    "bandcamp": "https://bandcamp.com/search?q=Boom%20Bass%20Bit%20Torrent%20/%20Limewire",
+    "discogs": "https://www.discogs.com/search/?q=Boom%20Bass%20Bit%20Torrent%20/%20Limewire",
+    "beatport": "https://www.beatport.com/search?q=Boom%20Bass%20Bit%20Torrent%20/%20Limewire"
+   }
+  }
+ ],
+ "library": [
+  {
+   "folder": "Library",
+   "files": 501,
+   "lossy": 0
+  },
+  {
+   "folder": "Singles",
+   "files": 218,
+   "lossy": 2
+  },
+  {
+   "folder": "CCDEP04",
+   "files": 135,
+   "lossy": 34
+  },
+  {
+   "folder": "CCDEP3 2",
+   "files": 98,
+   "lossy": 2
+  },
+  {
+   "folder": "CCDEP05",
+   "files": 3,
+   "lossy": 2
+  },
+  {
+   "folder": "Samples",
+   "files": 172,
+   "lossy": 0
+  },
+  {
+   "folder": "_LowQuality",
+   "files": 2180,
+   "lossy": 2172
+  }
+ ],
+ "goals": [
+  {
+   "horizon": "30 days",
+   "goal": "Finish 4 tracks",
+   "measure": "tracks finished",
+   "target": 4,
+   "done": 0,
+   "status": "in progress"
+  },
+  {
+   "horizon": "30 days",
+   "goal": "30 posts live",
+   "measure": "posts",
+   "target": 30,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "90 days",
+   "goal": "First EP, 4 to 5 tracks",
+   "measure": "EP mastered",
+   "target": 1,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "90 days",
+   "goal": "One live AV set on video",
+   "measure": "set recorded",
+   "target": 1,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "6 months",
+   "goal": "EP released on your own imprint",
+   "measure": "release live",
+   "target": 1,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "6 months",
+   "goal": "First bookings outside Bengaluru",
+   "measure": "out of town gigs",
+   "target": 2,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "12 months",
+   "goal": "Merman page past 100k",
+   "measure": "followers",
+   "target": 100000,
+   "done": 25000,
+   "status": "not started"
+  },
+  {
+   "horizon": "12 months",
+   "goal": "Monthly night or residency",
+   "measure": "nights run",
+   "target": 12,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "3 years",
+   "goal": "Top ten act in India for the genre",
+   "measure": "rank",
+   "target": 10,
+   "done": 0,
+   "status": "not started"
+  },
+  {
+   "horizon": "5 years",
+   "goal": "A label with other artists on it",
+   "measure": "artists signed",
+   "target": 3,
+   "done": 0,
+   "status": "not started"
+  }
+ ]
+}
