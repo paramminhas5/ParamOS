@@ -29,6 +29,9 @@
     },
     "api/content-scan.js": {
       "maxDuration": 60
+    },
+    "api/needs.js": {
+      "includeFiles": "mermanos/**"
     }
   },
   "crons": [
