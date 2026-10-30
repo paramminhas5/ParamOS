@@ -1,0 +1,972 @@
+<title>Param OS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0D0F14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Param OS">
+<link rel="manifest" href="/paramos/manifest.webmanifest">
+<link rel="icon" href="/paramos/icon-192.png">
+<link rel="apple-touch-icon" href="/paramos/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* A mixing desk: what needs you on top, lanes as channel strips that open up, agents as the control rack, logs underneath. */
+:root{
+  --bg:#EEF0F4; --panel:#FFFFFF; --ink:#12151C; --mute:#5D6576; --line:#D5DAE3; --accent:#2B54F0;
+  --ok:#1E9E5A; --warn:#D98A0B; --bad:#D6353F; --idle:#9AA2B1;
+  --ok-bg:#E3F4EA; --warn-bg:#FBF0DC; --bad-bg:#FBE4E5; --idle-bg:#ECEEF2; --accent-bg:#E5EBFF;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D0F14; --panel:#161A22; --ink:#E8EBF2; --mute:#8A93A6; --line:#262C38; --accent:#6F8CFF;
+  --ok:#3CCB7F; --warn:#F2A93B; --bad:#FF5C66; --idle:#5E6678;
+  --ok-bg:#12291D; --warn-bg:#2E2412; --bad-bg:#311518; --idle-bg:#1D222C; --accent-bg:#1A2346; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D0F14; --panel:#161A22; --ink:#E8EBF2; --mute:#8A93A6; --line:#262C38; --accent:#6F8CFF;
+  --ok:#3CCB7F; --warn:#F2A93B; --bad:#FF5C66; --idle:#5E6678;
+  --ok-bg:#12291D; --warn-bg:#2E2412; --bad-bg:#311518; --idle-bg:#1D222C; --accent-bg:#1A2346; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:36px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+h1{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:clamp(30px,6vw,52px);letter-spacing:-.01em;line-height:.95;margin:0;text-transform:uppercase}
+.sub{font-family:var(--mono);font-size:12px;color:var(--mute);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.sub b{color:var(--ink);font-weight:600}
+h2{font-family:var(--display);font-stretch:110%;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+h2 .count{font-family:var(--mono);background:var(--ink);color:var(--bg);border-radius:3px;padding:0 6px;letter-spacing:0}
+h2 .aside{font-family:var(--mono);font-size:11px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--mute)}
+h5{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.note{color:var(--mute);font-size:13px}
+.banner{border:1px solid var(--line);background:var(--panel);padding:12px 14px;border-radius:6px;font-size:14px}
+.banner.err{border-color:var(--bad);background:var(--bad-bg)}
+button,select,input[type=text]{font:600 13px var(--body);border-radius:5px;padding:7px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+button,select{cursor:pointer}
+input[type=text]{font-weight:400;min-width:0;flex:1 1 200px}
+select{padding:6px 8px;font-weight:500;max-width:100%}
+button.sm,select.sm{padding:4px 8px;font-size:12px}
+button:hover,select:hover{border-color:var(--ink)}
+button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.danger{background:var(--warn-bg);border-color:var(--warn);color:var(--ink)}
+button[disabled],select[disabled]{opacity:.5;cursor:default}
+a{color:var(--accent)}
+a.btn{display:inline-flex;align-items:center;font:600 13px var(--body);border-radius:5px;padding:7px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);text-decoration:none}
+a.btn:hover{border-color:var(--ink)}
+a.btn.sm{padding:4px 8px;font-size:12px}
+
+/* Today */
+.today{background:var(--ink);color:var(--bg);border-radius:10px;padding:16px 18px;display:grid;gap:14px}
+.today-top{display:flex;flex-wrap:wrap;gap:18px;align-items:end;justify-content:space-between}
+.today h2{color:var(--bg);margin:0}
+.streak{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;opacity:.85}
+.streak b{font-size:28px;font-weight:600;display:block;line-height:1;opacity:1}
+.dots{display:flex;gap:4px;align-items:center}
+.dots i{width:12px;height:12px;border-radius:3px;background:rgba(127,127,127,.35);display:block}
+.dots i.on{background:var(--ok)}
+.top3{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.top3 li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:rgba(127,127,127,.14);border-radius:6px;padding:10px 12px}
+.top3 .n{font-family:var(--mono);font-size:12px;opacity:.7}
+.top3 .x{flex:1 1 220px;font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.top3 .x a{color:inherit}
+.top3 .lane-tag{font-family:var(--mono);font-size:11px;opacity:.7}
+.today button,.today a.btn{background:transparent;color:var(--bg);border-color:rgba(127,127,127,.6)}
+.today button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.today .clear{font-size:15px}
+
+/* Queue */
+.queue{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:10px;min-width:0;align-content:start}
+.card.back{border-style:dashed}
+.card.flash{outline:2px solid var(--accent);outline-offset:2px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--mute)}
+.chip{font-family:var(--mono);font-size:11px;border-radius:3px;padding:1px 6px;background:var(--idle-bg);color:var(--ink);white-space:nowrap}
+.chip.lane{background:var(--accent-bg);color:var(--accent);font-weight:600}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.card h3{font-family:var(--display);font-stretch:100%;font-weight:700;font-size:17px;line-height:1.25;margin:0;text-wrap:balance;overflow-wrap:anywhere}
+.summary{white-space:pre-wrap;font-size:13.5px;max-height:7.5em;overflow:hidden;overflow-wrap:anywhere}
+.summary.open{max-height:none}
+.more{background:none;border:0;padding:0;color:var(--accent);font-size:12px;justify-self:start}
+.who{display:grid;gap:8px;border:1px solid var(--line);border-radius:6px;padding:10px;background:var(--bg)}
+.who .block{white-space:pre-wrap;font-size:13px;overflow-wrap:anywhere}
+.person{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font-size:13px}
+.person b{font-weight:700}
+.person .why{flex-basis:100%;color:var(--mute);font-size:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+textarea{width:100%;min-height:72px;font:14px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:8px}
+.yournote{font-size:13px;background:var(--warn-bg);border-radius:5px;padding:8px 10px;white-space:pre-wrap}
+
+/* Lanes */
+.lanes{display:grid;gap:10px}
+.lane{background:var(--panel);border:1px solid var(--line);border-radius:8px;min-width:0}
+.lane > summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;align-items:center}
+.lane > summary::-webkit-details-marker{display:none}
+.lane > summary h4{margin:0;font-family:var(--display);font-stretch:118%;font-weight:800;text-transform:uppercase;font-size:16px;letter-spacing:.02em}
+.lane > summary .line{grid-column:2/4;font-size:13px;color:var(--mute);overflow-wrap:anywhere}
+.lane > summary .counts{display:flex;gap:6px;flex-wrap:wrap;justify-content:end}
+.lane > summary .caret{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.lane[open] > summary{border-bottom:1px solid var(--line)}
+.lane[open] > summary .caret{transform:rotate(90deg)}
+.lane-body{padding:14px;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.lane-body .full{grid-column:1/-1}
+.led{width:10px;height:10px;border-radius:50%;background:var(--idle);flex:none;box-shadow:0 0 0 3px var(--idle-bg)}
+.led.ok{background:var(--ok);box-shadow:0 0 0 3px var(--ok-bg),0 0 10px var(--ok)}
+.led.warn{background:var(--warn);box-shadow:0 0 0 3px var(--warn-bg),0 0 10px var(--warn)}
+.led.bad{background:var(--bad);box-shadow:0 0 0 3px var(--bad-bg),0 0 10px var(--bad)}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.task{display:grid;grid-template-columns:1fr;gap:4px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.task .t{font-size:14px;overflow-wrap:anywhere}
+.task .t a{font-weight:600}
+.task .m{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.task .btns{display:flex;gap:4px;flex-wrap:wrap}
+.task.done{background:transparent;border-style:dashed}
+.task.done .t{color:var(--mute)}
+.task .notes{grid-column:1/-1;font-size:12px;color:var(--mute);white-space:pre-wrap}
+.addtask{display:flex;gap:6px;flex-wrap:wrap}
+.mini-agent{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px}
+.mini-agent b{flex:1 1 160px}
+.history{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:13px}
+.history li{display:grid;grid-template-columns:62px 1fr;gap:8px}
+.history .d{font-family:var(--mono);font-size:11px;color:var(--mute);padding-top:2px}
+
+/* Agents */
+.meter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.meter .tile{flex:1 1 160px}
+.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:12px}
+.agent{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:10px;min-width:0;align-content:start}
+.agent.off{background:transparent}
+.agent-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.agent h3{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:16px;margin:0;line-height:1.2;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere}
+.switch{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 6px;background:var(--panel);white-space:nowrap}
+.switch .dot{width:14px;height:14px;border-radius:50%;background:var(--idle)}
+.switch.on{border-color:var(--ok);background:var(--ok-bg)}
+.switch.on .dot{background:var(--ok)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;align-items:center;margin:0}
+.kv dt{font-family:var(--mono);font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.05em}
+.kv dd{margin:0;min-width:0}
+details.prompt summary{cursor:pointer;font-size:12px;color:var(--accent);font-weight:600}
+details.prompt pre{white-space:pre-wrap;font:12px/1.5 var(--mono);color:var(--mute);max-height:240px;overflow:auto;background:var(--bg);padding:10px;border-radius:5px;margin:8px 0 0}
+
+/* Numbers + runs */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:10px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;display:grid;gap:4px}
+.tile .v{font-family:var(--mono);font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.tile .k{font-size:12px;color:var(--mute)}
+.tablebox{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+td.num,td.date{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.res{font-family:var(--mono);font-size:11px;border-radius:3px;padding:1px 6px}
+.res.OK{background:var(--ok-bg);color:var(--ok)} .res.Partial{background:var(--warn-bg);color:var(--warn)} .res.Failed{background:var(--bad-bg);color:var(--bad)}
+.rules{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 18px}
+.rules ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div><h1>Param OS</h1></div>
+    <div class="sub" id="sub"><span>Loading…</span></div>
+    <nav class="sub"><a href="#merman-sec">Merman OS</a><a href="/mermanos">Merman page</a></nav>
+  </header>
+
+  <div id="pagemsg" hidden></div>
+
+  <section class="today" aria-labelledby="t-h" id="today"><p>Loading today…</p></section>
+
+  <section aria-labelledby="q-h">
+    <h2 id="q-h">Waiting on you <span class="count" id="q-count">–</span></h2>
+    <div id="queue" class="queue"><p class="note">Loading the approval queue…</p></div>
+  </section>
+
+  <section aria-labelledby="l-h">
+    <h2 id="l-h">Lanes <span class="aside">open a lane for its tasks, history, agents and links</span></h2>
+    <div id="lanes" class="lanes"><p class="note">Loading lanes…</p></div>
+  </section>
+
+  <section aria-labelledby="mm-h" id="merman-sec">
+    <h2 id="mm-h">Merman OS <span class="aside">music: crate finds, library, posts and releases</span></h2>
+    <div id="merman"><p class="note">Loading music…</p></div>
+  </section>
+
+  <section aria-labelledby="a-h">
+    <h2 id="a-h">Agents <span class="aside">switch on, run once, change schedule or model. Each run is one Claude session from your usage.</span></h2>
+    <div id="meter" class="meter"></div>
+    <div id="agents" class="agents"><p class="note">Loading your scheduled agents…</p></div>
+  </section>
+
+  <section aria-labelledby="m-h">
+    <h2 id="m-h">Last 7 days</h2>
+    <div id="tiles" class="tiles"><p class="note">Loading numbers…</p></div>
+  </section>
+
+  <section aria-labelledby="r-h">
+    <h2 id="r-h">Agent runs</h2>
+    <div id="runs"><p class="note">Loading runs…</p></div>
+  </section>
+
+  <section aria-labelledby="c-h">
+    <h2 id="c-h">How it runs</h2>
+    <div class="rules"><ol>
+      <li>Agents draft. You approve here. Nothing is sent, posted or applied for without you.</li>
+      <li>Every lane keeps its to-do list and history in the Tasks table. Agents add to it, and so can you.</li>
+      <li>"Hand to Claude" sends a task to the worker agent, which does it and reports back here.</li>
+      <li>Opus writes anything in your voice. Sonnet handles watching, sorting and reports.</li>
+      <li>Repeat fetching (job boards, events, tracks) moves to free scripts over time.</li>
+    </ol></div>
+  </section>
+</div>
+
+<script>
+/* Param OS web shim: gives the dashboard the same `mcp` interface inside claude.ai or on paramminhas.com/paramos.
+   On the web it talks to /api/paramos/airtable, keeps a saved copy for offline use, and queues edits made offline. */
+(function(){
+  if (window.claude && window.claude.use) return;
+  const K = k => "paramos:" + k;
+  const jget = (k, d) => { try { return JSON.parse(localStorage.getItem(K(k))) ?? d; } catch(_) { return d; } };
+  const jset = (k, v) => { try { localStorage.setItem(K(k), JSON.stringify(v)); } catch(_) {} };
+  const watchers = [];
+  let pending = jget("pending", []);
+  let needLogin = false;
+
+  const pill = document.createElement("div");
+  pill.style.cssText = "position:fixed;right:12px;bottom:12px;z-index:50;font:12px/1.4 ui-monospace,Menlo,monospace;background:#12151C;color:#fff;padding:6px 10px;border-radius:6px;display:none";
+  document.addEventListener("DOMContentLoaded", () => document.body.appendChild(pill));
+  function status(){
+    const off = !navigator.onLine;
+    pill.style.display = (off || pending.length) ? "block" : "none";
+    pill.textContent = (off ? "Offline, showing saved copy" : "Syncing") + (pending.length ? ` · ${pending.length} change${pending.length>1?"s":""} waiting` : "");
+  }
+  window.addEventListener("online", () => { flush(); status(); });
+  window.addEventListener("offline", status);
+
+  async function post(tool, args){
+    const r = await fetch("/paramos/api/airtable", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ tool, args }) });
+    if (r.status === 401){ needLogin = true; throw { code:"needs_login", message:"Reload and enter the Param OS password." }; }
+    if (r.status === 503 || r.status === 500) throw { code:"tool_error", message:"The server has no Airtable token yet." };
+    if (!r.ok) throw { code:"upstream_error", message:"Airtable said " + r.status };
+    return r.json();
+  }
+  const ckey = a => `${a.baseId}:${a.tableId}`;
+
+  async function flush(){
+    if (!navigator.onLine || needLogin || !pending.length) { status(); return; }
+    const rest = [];
+    for (const op of pending){
+      try { await post(op.tool, op.args); }
+      catch(e){ if (e && e.code === "needs_login") { rest.push(op); break; } rest.push(op); }
+    }
+    pending = rest.length === pending.length ? pending : rest; jset("pending", pending); status();
+    watchers.forEach(w => w.run());
+  }
+
+  function applyLocal(tool, args){
+    const c = jget("c:" + ckey(args), null); if (!c) return args.records;
+    const out = [];
+    for (const r of args.records){
+      if (tool === "update_records_for_table"){ const rec = c.records.find(x => x.id === r.id); if (rec) Object.assign(rec.cellValuesByFieldId, r.fields); out.push(rec || { id:r.id, cellValuesByFieldId:r.fields }); }
+      else { const rec = { id:"tmp_" + Math.random().toString(36).slice(2), cellValuesByFieldId:r.fields }; c.records.push(rec); out.push(rec); }
+    }
+    jset("c:" + ckey(args), c); return out;
+  }
+
+  const mcp = {
+    async callTool(server, tool, args){
+      if (server !== "Airtable") throw { code:"web_only", message:"Agent controls are in the Claude version." };
+      if (tool === "list_records_for_table"){
+        try {
+          const j = await post(tool, args);
+          const c = { records:j.records, storedAt:Date.now() }; jset("c:" + ckey(args), c);
+          return { payload:{ records:j.records }, cache:{ storedAt:c.storedAt } };
+        } catch(e){
+          const c = jget("c:" + ckey(args), null);
+          if (c && (!navigator.onLine || e.code === "upstream_error" || e instanceof TypeError)) return { payload:{ records:c.records }, cache:{ storedAt:c.storedAt } };
+          if (e instanceof TypeError) throw { code:"server_unavailable", message:"Offline and nothing saved yet." };
+          throw e;
+        }
+      }
+      try { const j = await post(tool, args); return { payload:j }; }
+      catch(e){
+        if (e instanceof TypeError || !navigator.onLine){
+          const recs = applyLocal(tool, args);
+          pending.push({ tool, args }); jset("pending", pending); status();
+          return { payload:{ records:recs }, queued:true };
+        }
+        throw e;
+      }
+    },
+    watchTool(server, tool, args, cb, opts){
+      const w = { run: async () => {
+        try { const result = await mcp.callTool(server, tool, args); cb({ type:"data", result }); }
+        catch(e){ cb({ type:"error", error:e }); }
+      }};
+      watchers.push(w); w.run();
+      if (opts && opts.refetchInterval && server === "Airtable") setInterval(() => { if (navigator.onLine && !document.hidden && !needLogin) w.run(); }, opts.refetchInterval);
+      document.addEventListener("visibilitychange", () => { if (!document.hidden && navigator.onLine && !needLogin) w.run(); });
+      return () => {};
+    },
+    async invalidate(){ watchers.forEach(w => w.run()); }
+  };
+  window.claude = { use: async name => name === "mcp" ? mcp : null, web: true };
+  flush();
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("/paramos/sw.js", { scope:"/paramos" }).catch(() => {});
+})();
+</script>
+<script>
+const AT = "Airtable", CCR = "Claude Code Remote";
+const BASE = "appVRRUkNDx089A4R", JOBS = "appuSXKcNmuc3ifVS";
+const T = { queue:"tblGIUtKrOmeYNx8v", runs:"tblHysNjC8p2sO6dy", metrics:"tblvXBhpbXEhOWIRo", lanes:"tblvkUfJB3qy2cbxt", tasks:"tbl7wmOhQvnIyxhQJ" };
+const PEOPLE = "tbl3qL3x492Q88wuL", QUESTIONS = "tbl0WA0vi8VQY4q6n";
+const HQ = "https://claude.ai/artifact/FVzMuZyWvPHHjbEiAQvQ3P";
+const F = {
+  q:{item:"fldk8G7rQ4CZlq8AF",lane:"fldT855ERx0jhinmQ",type:"fld5GE4AlYScCj6IL",status:"fldzozzuzddTxtYSU",summary:"fldWlxQXrpUdjYavK",link:"fldv9YfGcCQ0SBdb8",apply:"fldwp3hhX7urpo2HS",notes:"fldm4HKj7a565qeNt",created:"fldsUEP1dGbHfNlcN",due:"fldVNPNkTOCs25hVg",agent:"fldruq8rpP1mMvBEL",sendto:"fld1MtxyeoHbnfoIl",know:"fldPsACXL8kiEdrtD",draft:"fldKloKStyayUfn5U"},
+  r:{run:"flduu1JyFZ3ggWRPh",agent:"fldISs8RuhDzR8N08",date:"fldh62EbF7Xulgbyv",result:"fldnrXCkilf5P6qFt",summary:"fldVpxML2Kb3ma1Bx",items:"fldufc72HU9gacx7B"},
+  m:{metric:"fldTpiIBBwSG3QoOw",lane:"fldbD1MOfjOOsy5LZ",value:"fld6znMmduCpFWAOT",date:"fldC8NbGYxURRyiAt"},
+  l:{lane:"fldO7z0Sfh6XulCBJ",health:"fldBOA6WJpMID4tBJ",status:"fldtgPJNIqGvERSOe",next:"fldx6JklZH4MtfD5K",updated:"fldWsdxNVnwtsoSW3"},
+  t:{task:"fldNfXmORAFUsmJcW",lane:"fldYnGaPv7tPqtjMt",status:"fld9CDWv538JBf8lB",owner:"fldxD7ScZLmjAaMvA",due:"flddyROAKqsF02dSE",doneOn:"fldrpyjcDBG7966oQ",link:"fldvSHaVIXOY7X7WN",notes:"fldjfG5ThTKMbgd9C",order:"fldhVPjHfUrLsKSji"},
+  p:{name:"fldAaYPo9GlHMSaoX",title:"fldDDIAeEdnaff4Nr",company:"fldG22MmCRWvi3lsG",type:"fldX7y1fXzk78uUFF",status:"fld8wY3FYDnNHr0RY",li:"fldZFAYgvfc96ehZQ",email:"fldJny5AyfHfDz56b",how:"fldfi056tYQ7SYIJG",notes:"fld5yHG3Zquq5c3Ga"}
+};
+const LANE_ORDER = ["Jobs","Clout","Music","Socials","Personal site","CCD","Pregame","Iterate","Machine","Trading","System"];
+const HEALTH = ["On track","Needs you","Blocked","Not started"];
+const MODELS = [["claude-opus-5-5","Opus 5.5 (writing)"],["claude-sonnet-5-5","Sonnet 5.5 (routine)"],["claude-haiku-5-5","Haiku 5.5 (cheapest)"]];
+const PRESETS = [["*","Every day"],["1-6","Mon to Sat"],["1-5","Weekdays"],["1,3,5","Mon, Wed, Fri"],["2,5","Tue and Fri"],["1,4","Mon and Thu"],["1","Mondays"],["0","Sundays"]];
+const RUN_LANE = { "Job Hunter":"Jobs","Role watcher":"Jobs","Funding radar":"Jobs","Job report":"Jobs","Clout":"Clout","Worker":null };
+const LINKS = {
+  Jobs:[["Job Search HQ (answer questions)","https://claude.ai/artifact/FVzMuZyWvPHHjbEiAQvQ3P"],["Turnaround plan","https://claude.ai/artifact/5d4Y36pjPKFYE9P9xGyAhe"],["Airtable: Job Search 2026","https://airtable.com/appuSXKcNmuc3ifVS"],["Gmail drafts","https://mail.google.com/mail/u/0/#drafts"],["LinkedIn messages","https://www.linkedin.com/messaging/"]],
+  Clout:[["Zapier connections","https://zapier.com/app/connections"],["paramminhas.com","https://paramminhas.com"],["LinkedIn","https://www.linkedin.com/feed/"]],
+  Music:[["Music full-time case","https://claude.ai/artifact/RjiUi1xZG2iHYqdMsMNB9r"]],
+  Socials:[["Instagram","https://www.instagram.com/"],["Meta Business Suite","https://business.facebook.com/"]],
+  "Personal site":[["Repo: parampokemon","https://github.com/paramminhas5/parampokemon"],["paramminhas.com","https://paramminhas.com"]],
+  CCD:[["catscandance.com","https://catscandance.com"],["Repo: CCDWORKING (live)","https://github.com/paramminhas5/CCDWORKING"],["Repo: CCD-Final-Next.Js","https://github.com/paramminhas5/CCD-Final-Next.Js"],["CCD School PRD","https://claude.ai/artifact/QF8xoUoJy7aYYzqDeUaYwA"],["CCD School Blueprint","https://claude.ai/artifact/82pFG7AUjszruBb6BrGRyC"]],
+  Pregame:[["Company Plan","https://claude.ai/artifact/2FHsS61nfNakJUTQ9tYVEe"],["Product Document","https://claude.ai/artifact/LvtYzvRBmHeprYP4KBPXHP"],["8club Teardown","https://claude.ai/artifact/DqMyzsfw4GHxbqoFJcDqYQ"]],
+  Iterate:[["hyperiterate.com","https://hyperiterate.com"],["Repo: iterateblack-next","https://github.com/paramminhas5/iterateblack-next"],["ChargeZone menu","https://claude.ai/artifact/Spq1kJ3CWX7LfeD8sVm5YQ"]],
+  Machine:[],
+  Trading:[],
+  System:[["Airtable: Param OS","https://airtable.com/appVRRUkNDx089A4R"],["All my artifacts","https://claude.ai/code/artifacts"],["GitHub repos","https://github.com/paramminhas5?tab=repositories"]]
+};
+
+const state = { queue:null, runs:null, metrics:null, lanes:null, tasks:null, people:null, questions:null, agents:null, openNote:null, openLanes:new Set(), busy:new Set(), arm:null, atStamp:null, errors:{} };
+let mcp = null;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const val = v => (v && typeof v === "object" && !Array.isArray(v) && "name" in v) ? v.name : (v ?? "");
+const cell = (rec, fid) => val(rec.cellValuesByFieldId?.[fid]);
+const raw = (rec, fid) => rec.cellValuesByFieldId?.[fid];
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const todayISO = () => new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});
+const fmtDate = d => { if(!d) return ""; const x = new Date(String(d).slice(0,10)+"T00:00:00"); return isNaN(x) ? d : x.toLocaleDateString("en-GB",{day:"numeric",month:"short"}); };
+const fmtWhen = iso => { if(!iso) return ""; const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Asia/Kolkata"}); };
+const linkify = s => esc(s).replace(/https?:\/\/[^\s<]+/g, u => `<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https?:\/\/(www\.)?/,"").slice(0,48)}${u.length>60?"…":""}</a>`);
+const norm = s => String(s||"").toLowerCase().replace(/\(.*?\)/g,"").replace(/[^a-z0-9]+/g," ").trim();
+
+function errorCopy(e, server){
+  const s = server || "the connector";
+  switch(e?.code){
+    case "needs_reauth": return `${s} needs reconnecting. Go to claude.ai Settings, Connectors, and reconnect it.`;
+    case "server_not_connected": return `${s} isn't connected for you. Add it in claude.ai Settings, Connectors.`;
+    case "selection_required": return `You have more than one ${s} connector. Pick one when claude.ai asks, then reload.`;
+    case "not_in_manifest": case "consent_required": return `This page isn't allowed to use ${s} yet. Allow it from the page's permissions, then reload.`;
+    case "web_only": return "Agent switches and Run now live in the Claude version of Param OS.";
+    case "needs_login": return "Reload this page and enter the Param OS password.";
+    case "approval_required": return `${s} needs your approval for this page.`;
+    case "blocked_by_policy": return `Your organisation blocks this ${s} action.`;
+    case "server_unavailable": return `${s} didn't answer just now. It retries on the next refresh.`;
+    case "tool_error": return `${s} refused the request: ` + (e.message || "unknown error");
+    default: return `Couldn't reach ${s} (` + (e?.code || "unknown") + "). Reload to try again.";
+  }
+}
+const DENIALS = ["needs_reauth","server_not_connected","not_in_manifest","blocked_by_policy","consent_required","selection_required","approval_required"];
+
+/* ---------- Loading ---------- */
+const SECTIONS = { queue:"queue", lanes:"lanes", tasks:"lanes", runs:"runs", metrics:"tiles", people:null, questions:null };
+function sectionError(key, e){
+  state.errors[key] = e;
+  const had = state[key] != null;
+  if (DENIALS.includes(e?.code)) state[key] = null;
+  if (e?.code === "server_unavailable" && had) { renderAll(); return; }
+  const el = SECTIONS[key] && $(SECTIONS[key]);
+  if (el) el.innerHTML = `<div class="banner err">${esc(errorCopy(e, AT))}${e?.code === "approval_required" ? ' <button data-approve="at">Allow and load</button>' : ""}</div>`;
+}
+function watchAT(key, base, table, size){
+  mcp.watchTool(AT, "list_records_for_table", { baseId: base, tableId: table, pageSize: size || 100 }, ev => {
+    if (ev.type === "data"){
+      const p = ev.result.payload;
+      state[key] = (p && Array.isArray(p.records)) ? p.records : [];
+      delete state.errors[key];
+      state.atStamp = ev.result.cache?.storedAt || Date.now();
+      renderAll();
+    } else sectionError(key, ev.error);
+  }, { refetchInterval: 120000 });
+}
+async function loadATOnce(){
+  const jobs = [["queue",BASE,T.queue],["lanes",BASE,T.lanes],["tasks",BASE,T.tasks,200],["runs",BASE,T.runs],["metrics",BASE,T.metrics],["people",JOBS,PEOPLE,200],["questions",JOBS,QUESTIONS,200]];
+  for (const [k,b,t,n] of jobs){
+    try { const r = await mcp.callTool(AT,"list_records_for_table",{ baseId:b, tableId:t, pageSize:n||100 }); state[k] = r.payload?.records || []; delete state.errors[k]; }
+    catch(e){ sectionError(k, e); }
+  }
+  renderAll();
+}
+async function refreshAT(){ try { await mcp.invalidate(AT, "list_records_for_table"); } catch(_){ loadATOnce(); } }
+
+async function fetchRestPages(first){
+  let all = [...(first.data || [])], cur = first.has_more ? first.next_cursor : null, guard = 0;
+  while (cur && guard++ < 10){
+    const r = await mcp.callTool(CCR, "list_triggers", { limit: 100, cursor: cur });
+    const p = r.payload || {};
+    all = all.concat(p.data || []);
+    cur = p.has_more ? p.next_cursor : null;
+  }
+  return all;
+}
+function watchAgents(){
+  mcp.watchTool(CCR, "list_triggers", { limit: 100 }, async ev => {
+    if (ev.type === "data"){
+      const p = ev.result.payload || {};
+      try { state.agents = await fetchRestPages(p); } catch(_){ state.agents = p.data || []; }
+      renderAgents(); renderLanes();
+    } else {
+      const e = ev.error;
+      if (DENIALS.includes(e?.code)) state.agents = null;
+      if (e?.code === "server_unavailable" && state.agents){ renderAgents(); return; }
+      $("meter").innerHTML = "";
+      $("agents").innerHTML = `<div class="banner err">${esc(errorCopy(e, CCR))}${e?.code === "approval_required" ? ' <button data-approve="ccr">Allow and load</button>' : ""}</div>`;
+    }
+  }, { refetchInterval: 300000 });
+}
+async function loadAgentsOnce(){
+  try { const r = await mcp.callTool(CCR, "list_triggers", { limit: 100 }); state.agents = await fetchRestPages(r.payload || {}); renderAgents(); renderLanes(); }
+  catch(e){ $("agents").innerHTML = `<div class="banner err">${esc(errorCopy(e, CCR))}</div>`; }
+}
+async function refreshAgents(){ try { await mcp.invalidate(CCR, "list_triggers"); } catch(_){ loadAgentsOnce(); } }
+
+/* ---------- Cron helpers ---------- */
+function parseCron(expr){
+  const m = String(expr || "").match(/^(?:CRON_TZ=(\S+)\s+)?(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)$/);
+  return m ? { tz:m[1] || "UTC", min:m[2], hour:m[3], dom:m[4], mon:m[5], dow:m[6] } : null;
+}
+function runsPerWeek(expr){
+  const c = parseCron(expr); if (!c || c.dom !== "*" || c.mon !== "*" || !/^[\d,]+$/.test(c.hour)) return null;
+  const hours = c.hour.split(",").length; let days = 0;
+  if (c.dow === "*") days = 7;
+  else for (const part of c.dow.split(",")){ const r = part.match(/^(\d)-(\d)$/); if (r) days += (+r[2]) - (+r[1]) + 1; else if (/^\d$/.test(part)) days += 1; else return null; }
+  return days * hours;
+}
+const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function humanCron(expr){
+  const c = parseCron(expr); if (!c) return expr || "Runs only when you press Run";
+  const preset = PRESETS.find(p => p[0] === c.dow);
+  const days = preset ? preset[1] : c.dow.replace(/\d/g, d => DOW[+d] || d);
+  const time = (/^\d+$/.test(c.hour) && /^\d+$/.test(c.min)) ? `${c.hour.padStart(2,"0")}:${c.min.padStart(2,"0")}` : `${c.hour}:${c.min}`;
+  return `${days} · ${time} ${c.tz === "Asia/Kolkata" ? "IST" : c.tz}`;
+}
+function withDow(expr, dow){ const c = parseCron(expr); return c ? `${/^CRON_TZ=/.test(expr) ? "CRON_TZ="+c.tz+" " : ""}${c.min} ${c.hour} * * ${dow}` : null; }
+function laneOf(name){
+  const n = (name||"").toLowerCase();
+  if (n.includes("job")) return "Jobs";
+  if (n.includes("clout") || n.includes("content")) return "Clout";
+  if (n.includes("music")) return "Music";
+  if (n.includes("ccd")) return "CCD";
+  if (n.includes("trad")) return "Trading";
+  if (n.includes("machine") || n.includes("clean")) return "Machine";
+  if (n.includes("worker") || n.includes("param os")) return "System";
+  return "Other";
+}
+const worker = () => (state.agents||[]).find(t => /worker/i.test(t.name||""));
+function lastRunChip(t){
+  const lr = t.last_run;
+  if (!lr) return `<span class="chip">never run</span>`;
+  const s = String(lr.status||"").replace("ROUTINE_RUN_STATUS_","");
+  const why = String(lr.failure_reason||"").replace("ROUTINE_RUN_FAILURE_REASON_","").replace("UNSPECIFIED","");
+  const cls = s === "SUCCEEDED" ? "ok" : s === "FAILED" ? "bad" : "warn";
+  const label = s === "SUCCEEDED" ? "worked" : s === "FAILED" ? "failed" + (why ? ": " + why.toLowerCase().replace(/_/g," ") : "") : s.toLowerCase();
+  return `<span class="chip ${cls}">${esc(label)}</span> <span class="note">${esc(fmtWhen(lr.fired_at))}</span>`;
+}
+
+/* ---------- Render: header ---------- */
+function stampHeader(){
+  const q = (state.queue||[]).filter(r => cell(r,F.q.status) === "Needs approval").length;
+  const mine = (state.tasks||[]).filter(r => cell(r,F.t.owner) === "Param" && ["Todo","Doing","Blocked"].includes(cell(r,F.t.status))).length;
+  const on = (state.agents||[]).filter(t => t.enabled && !t.run_once_at).length;
+  const stamp = new Date(state.atStamp || Date.now());
+  $("sub").innerHTML = `<span><b>${q}</b> to approve</span><span><b>${mine}</b> tasks on you</span><span><b>${on}</b> agents on</span><span>synced ${stamp.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Kolkata"})} IST</span><button id="refresh">Refresh</button>`;
+  $("refresh").onclick = () => { refreshAT(); refreshAgents(); };
+}
+function renderAll(){ renderMerman(); renderToday(); renderQueue(); renderLanes(); renderTiles(); renderRuns(); stampHeader(); }
+
+let MM = null;
+async function loadMM(){
+  try { const r = await fetch("/mermanos/state.json", { cache:"no-store" }); if (r.ok){ MM = await r.json(); try { localStorage.setItem("paramos:mm", JSON.stringify(MM)); } catch(_){} } }
+  catch(_){}
+  if (!MM) { try { MM = JSON.parse(localStorage.getItem("paramos:mm")); } catch(_){} }
+  renderMerman();
+}
+function renderMerman(){
+  const el = $("merman"); if (!el) return;
+  const inLane = r => cell(r,F.q.lane) === "Music";
+  const q = (state.queue||[]).filter(r => inLane(r) && cell(r,F.q.status) === "Needs approval");
+  const tasks = (state.tasks||[]).filter(t => cell(t,F.t.lane) === "Music" && cell(t,F.t.status) !== "Done");
+  const lane = (state.lanes||[]).find(l => cell(l,F.l.lane) === "Music");
+  const runs = (state.runs||[]).filter(r => cell(r,F.r.agent) === "Music Curator").sort((a,b) => String(cell(b,F.r.date)).localeCompare(String(cell(a,F.r.date))));
+  const finds = (state.metrics||[]).filter(m => cell(m,F.m.metric) === "Crate new finds").sort((a,b) => String(cell(b,F.m.date)).localeCompare(String(cell(a,F.m.date))))[0];
+  const last = runs[0];
+  el.innerHTML = `<div class="card">
+    <div class="meta"><span class="chip lane">Music</span>${lane ? `<span>${esc(cell(lane,F.l.health))}</span>` : ""}<span>${last ? "last crate run " + esc(fmtDate(cell(last,F.r.date))) : "crate has not synced yet"}</span>${finds ? `<span>${esc(raw(finds,F.m.value))} finds in the crate</span>` : ""}</div>
+    ${MM && MM.headline ? `<div class="meta"><span>${esc(MM.headline.finds_waiting)} finds waiting</span><span>${esc(MM.headline.sets_touched_30d)} sets touched in 30 days</span><span>${esc(MM.headline.lossy_files)} low quality files to upgrade</span><span>latest project ${esc(MM.headline.latest_project)}${MM.headline.latest_bpm ? " at " + esc(MM.headline.latest_bpm) + " bpm" : ""}</span><span>${esc(MM.headline.days_since_last_session)} days since last session</span></div>` : ""}
+    <p style="margin:0"><a href="/mermanos">Open the full Merman OS</a></p>
+    ${lane && cell(lane,F.l.next) ? `<p style="margin:0"><b>Next:</b> ${linkify(cell(lane,F.l.next))}</p>` : ""}
+    <div><b>Records to decide on (${q.length})</b>${q.length ? q.slice(0,6).map(r => `<div class="note" style="margin-top:6px"><b>${esc(cell(r,F.q.item))}</b><br>${linkify(cell(r,F.q.summary))}</div>`).join("") : `<div class="note">Nothing waiting. Crate sends its top finds after its weekly run.</div>`}</div>
+    <div><b>Music to-dos (${tasks.length})</b>${tasks.slice(0,6).map(t => `<div class="note" style="margin-top:4px">${esc(cell(t,F.t.status))}: ${esc(cell(t,F.t.task))}</div>`).join("") || `<div class="note">None open.</div>`}</div>
+    <details><summary class="note">Crate commands (run on your Mac)</summary><pre class="note" style="white-space:pre-wrap;margin:8px 0 0">crate weekly --apply   scan, file the inbox, discover, sync here
+crate candidates       ranked finds
+crate want 12 31       mark records to buy
+crate skip 7           never show again
+crate studio lesson    one thing to study this week
+crate post new 12      start a post, write your TAKE, then finalize</pre></details>
+  </div>`;
+}
+
+/* ---------- Render: today ---------- */
+function streakInfo(){
+  const days = new Set((state.tasks||[]).filter(t => cell(t,F.t.status) === "Done" && cell(t,F.t.doneOn)).map(t => String(cell(t,F.t.doneOn)).slice(0,10)));
+  const iso = d => d.toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});
+  const now = new Date(); let streak = 0;
+  const today = iso(now);
+  for (let i = days.has(today) ? 0 : 1; i < 400; i++){ const d = iso(new Date(now.getTime() - i*864e5)); if (days.has(d)) streak++; else break; }
+  const last14 = Array.from({length:14}, (_,i) => { const d = iso(new Date(now.getTime() - (13-i)*864e5)); return { d, on: days.has(d) }; });
+  return { streak, doneToday: days.has(today), last14, todayCount: (state.tasks||[]).filter(t => String(cell(t,F.t.doneOn)||"").slice(0,10) === today).length };
+}
+function renderToday(){
+  const el = $("today");
+  if (state.tasks == null && state.queue == null) return;
+  const today = todayISO();
+  const items = [];
+  const openQ = (state.questions||[]).filter(q => cell(q,"fldemzdPYzOB4SpZx") === "Open").length;
+  (state.queue||[]).filter(q => cell(q,F.q.status) === "Needs approval").forEach(q => items.push({ score: 0 + (cell(q,F.q.due) && cell(q,F.q.due) <= today ? -1 : 0), lane: cell(q,F.q.lane), text: `Approve or skip: ${cell(q,F.q.item)}`, jump: q.id }));
+  (state.queue||[]).filter(q => cell(q,F.q.status) === "Approved" && cell(q,F.q.lane) === "Jobs").forEach(q => items.push({ score: 1, lane: "Jobs", text: `Send: ${cell(q,F.q.item)}`, jump: q.id }));
+  if (openQ) items.push({ score: 1.5, lane: "Jobs", text: `Answer ${openQ} question${openQ>1?"s":""} in Job Search HQ`, url: HQ });
+  (state.tasks||[]).filter(t => cell(t,F.t.owner) === "Param" && ["Todo","Doing","Blocked"].includes(cell(t,F.t.status))).forEach(t => {
+    const due = cell(t,F.t.due); const late = due && due < today, now = due === today;
+    items.push({ score: late ? -0.5 : now ? 0.5 : cell(t,F.t.status) === "Blocked" ? 2 : 3 + ((raw(t,F.t.order) ?? 9)/100), lane: cell(t,F.t.lane), text: cell(t,F.t.task) + (late ? " (overdue)" : ""), task: t.id, url: safeUrl(cell(t,F.t.link)) });
+  });
+  items.sort((a,b) => a.score - b.score);
+  const top = items.slice(0,3), rest = items.length - top.length;
+  const s = streakInfo();
+  el.innerHTML = `<div class="today-top">
+      <div><h2 id="t-h">Today</h2><div class="note" style="color:inherit;opacity:.7">${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",timeZone:"Asia/Kolkata"})}</div></div>
+      <div class="streak"><span><b>${s.streak}</b>day streak</span><span><b>${s.todayCount}</b>done today</span>
+        <span class="dots" title="Last 14 days with at least one task done">${s.last14.map(x => `<i class="${x.on ? "on" : ""}" title="${x.d}"></i>`).join("")}</span></div>
+    </div>
+    ${top.length ? `<ol class="top3">${top.map((x,i) => `<li><span class="n">${i+1}</span><span class="x">${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.text)}</a>` : esc(x.text)}</span><span class="lane-tag">${esc(x.lane||"")}</span>
+        ${x.task ? `<button class="sm primary" data-task="done" data-id="${esc(x.task)}">Done</button><button class="sm" data-task="hand" data-id="${esc(x.task)}">Hand to Claude</button>` : ""}
+        ${x.jump ? `<button class="sm primary" data-jump="${esc(x.jump)}">Open</button>` : ""}
+        ${x.url && !x.task ? `<a class="btn sm" href="${esc(x.url)}" target="_blank" rel="noopener">Open</a>` : ""}
+        <span class="notes" id="tm-${esc(x.task||"")}"></span></li>`).join("")}</ol>
+      ${rest > 0 ? `<div class="note" style="color:inherit;opacity:.7">${rest} more in the lanes below.</div>` : ""}`
+    : `<div class="clear">Desk is clear. ${s.doneToday ? "Streak kept for today." : "Open a lane and finish one task to keep the streak."}</div>`}`;
+}
+
+/* ---------- Render: queue ---------- */
+function companyOf(item){ return String(item||"").split(" · ")[0]; }
+function peopleAt(company){
+  const c = norm(company); if (!c || !state.people) return [];
+  return state.people.filter(p => {
+    const cos = (raw(p,F.p.company) || []).map(x => norm(x.name || x));
+    const blob = norm([cell(p,F.p.title), cell(p,F.p.notes)].join(" "));
+    return cos.some(n => n && (n === c || n.startsWith(c) || c.startsWith(n))) || (c.length > 3 && blob.includes(c));
+  });
+}
+function personHtml(p){
+  const li = safeUrl(cell(p,F.p.li)), em = cell(p,F.p.email);
+  return `<div class="person"><b>${esc(cell(p,F.p.name))}</b><span class="note">${esc(cell(p,F.p.title))}</span>
+    ${li ? `<a href="${esc(li)}" target="_blank" rel="noopener">LinkedIn</a>` : ""}${em ? `<a href="mailto:${esc(em)}">${esc(em)}</a>` : ""}
+    <span class="chip">${esc(cell(p,F.p.status) || "Not contacted")}</span>
+    <span class="why">${esc(cell(p,F.p.how))}${cell(p,F.p.notes) ? " · " + esc(cell(p,F.p.notes)) : ""}</span></div>`;
+}
+function renderQueue(){
+  const el = $("queue");
+  if (state.queue == null) return;
+  const order = ["Needs approval","Approved","Changes requested"];
+  const items = state.queue.filter(r => order.includes(cell(r,F.q.status)))
+    .sort((a,b) => order.indexOf(cell(a,F.q.status)) - order.indexOf(cell(b,F.q.status))
+      || LANE_ORDER.indexOf(cell(a,F.q.lane)) - LANE_ORDER.indexOf(cell(b,F.q.lane))
+      || String(cell(b,F.q.created)).localeCompare(String(cell(a,F.q.created))));
+  $("q-count").textContent = items.filter(r => cell(r,F.q.status) === "Needs approval").length;
+  if (!items.length){ el.innerHTML = `<div class="banner">Nothing waiting on you. Agents drop new work here as they run.</div>`; return; }
+  const today = todayISO();
+  el.innerHTML = items.map(r => {
+    const id = r.id, st = cell(r,F.q.status), back = st === "Changes requested", approved = st === "Approved";
+    const due = cell(r,F.q.due), overdue = due && due < today && !back;
+    const link = safeUrl(cell(r,F.q.link)), apply = safeUrl(cell(r,F.q.apply)), draft = safeUrl(cell(r,F.q.draft));
+    const lane = cell(r,F.q.lane), isJob = lane === "Jobs";
+    const busy = state.busy.has(id), noteOpen = state.openNote === id;
+    const sendto = cell(r,F.q.sendto), know = cell(r,F.q.know);
+    const live = isJob ? peopleAt(companyOf(cell(r,F.q.item))) : [];
+    const company = companyOf(cell(r,F.q.item));
+    return `<article class="card${back ? " back" : ""}" id="card-${esc(id)}">
+      <div class="meta"><span class="chip lane">${esc(lane)}</span><span class="chip">${esc(cell(r,F.q.type))}</span>
+        ${back ? '<span class="chip warn">Sent back, agent redoes it next run</span>' : ""}
+        ${approved ? `<span class="chip ok">Approved: ${isJob ? "your move, send it" : "goes out next run"}</span>` : ""}
+        ${overdue ? '<span class="chip warn">Overdue</span>' : due ? `<span>due ${esc(fmtDate(due))}</span>` : ""}</div>
+      <h3>${esc(cell(r,F.q.item))}</h3>
+      ${(sendto || know || live.length) ? `<div class="who">
+        ${sendto ? `<div><h5>Send to</h5><div class="block">${linkify(sendto)}</div></div>` : (isJob ? `<div><h5>Send to</h5><div class="block note">Not set by the agent.</div></div>` : "")}
+        ${know ? `<div><h5>Who you know</h5><div class="block">${linkify(know)}</div></div>` : ""}
+        ${live.length ? `<div><h5>In your People list at ${esc(company)}</h5>${live.map(personHtml).join("")}</div>` : (isJob && !know ? `<div class="note">No one at ${esc(company)} in your People list.</div>` : "")}
+      </div>` : ""}
+      ${cell(r,F.q.summary) ? `<div class="summary" id="s-${esc(id)}">${esc(cell(r,F.q.summary))}</div><button class="more" data-more="${esc(id)}">Show all</button>` : ""}
+      <div class="links">
+        ${draft ? `<a class="btn sm" href="${esc(draft)}" target="_blank" rel="noopener">Open draft</a>` : ""}
+        ${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">${isJob ? "Open CV" : "Open"}</a>` : ""}
+        ${apply ? `<a class="btn sm" href="${esc(apply)}" target="_blank" rel="noopener">Apply</a>` : (isJob ? `<a class="btn sm" href="https://www.google.com/search?q=${encodeURIComponent(cell(r,F.q.item).replace(" · "," ")+" job")}" target="_blank" rel="noopener">Find posting</a>` : "")}
+      </div>
+      ${cell(r,F.q.notes) && back ? `<div class="yournote">${esc(cell(r,F.q.notes))}</div>` : ""}
+      ${back ? "" : approved ? `<div class="actions">
+          <button class="primary" data-act="done" data-id="${esc(id)}" ${busy?"disabled":""}>${isJob ? "I sent it" : "Mark done"}</button>
+          <button data-act="handq" data-id="${esc(id)}" ${busy?"disabled":""}>Hand to Claude</button>
+          <button data-act="skip" data-id="${esc(id)}" ${busy?"disabled":""}>Drop it</button></div>`
+        : noteOpen ? `
+        <label class="note" for="n-${esc(id)}">What should change? The agent turns this into a rule for every future run.</label>
+        <textarea id="n-${esc(id)}">${esc(cell(r,F.q.notes))}</textarea>
+        <div class="actions"><button class="primary" data-act="send" data-id="${esc(id)}" ${busy?"disabled":""}>Send back</button><button data-act="cancel" data-id="${esc(id)}">Cancel</button></div>`
+      : `<div class="actions">
+        <button class="primary" data-act="approve" data-id="${esc(id)}" ${busy?"disabled":""}>Approve</button>
+        <button data-act="note" data-id="${esc(id)}" ${busy?"disabled":""}>Request changes</button>
+        <button data-act="skip" data-id="${esc(id)}" ${busy?"disabled":""}>Skip</button></div>`}
+      <div class="note" id="msg-${esc(id)}"></div>
+    </article>`;
+  }).join("");
+}
+
+/* ---------- Render: lanes ---------- */
+function laneTasks(lane){ return (state.tasks||[]).filter(r => cell(r,F.t.lane) === lane); }
+function taskHtml(r){
+  const id = r.id, st = cell(r,F.t.status) || "Todo", done = st === "Done", busy = state.busy.has(id);
+  const link = safeUrl(cell(r,F.t.link)), owner = cell(r,F.t.owner), due = cell(r,F.t.due);
+  const overdue = !done && due && due < todayISO();
+  const stChip = st === "Blocked" ? "bad" : st === "Doing" ? "warn" : done ? "ok" : "";
+  return `<li class="task${done ? " done" : ""}">
+    <div class="t">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(cell(r,F.t.task))}</a>` : esc(cell(r,F.t.task))}</div>
+    <div class="m"><span class="chip ${stChip}">${esc(st)}</span> ${owner ? esc(owner) : ""}${done && cell(r,F.t.doneOn) ? " · done " + esc(fmtDate(cell(r,F.t.doneOn))) : due ? ` · <span ${overdue ? 'style="color:var(--bad)"' : ""}>due ${esc(fmtDate(due))}</span>` : ""}</div>
+    <div class="btns">${done ? `<button class="sm" data-task="reopen" data-id="${esc(id)}" ${busy?"disabled":""}>Reopen</button>` : `
+      <button class="sm primary" data-task="done" data-id="${esc(id)}" ${busy?"disabled":""}>Done</button>
+      ${st !== "Doing" ? `<button class="sm" data-task="doing" data-id="${esc(id)}" ${busy?"disabled":""}>Start</button>` : ""}
+      ${st !== "Blocked" ? `<button class="sm" data-task="blocked" data-id="${esc(id)}" ${busy?"disabled":""}>Blocked</button>` : ""}
+      <button class="sm" data-task="hand" data-id="${esc(id)}" ${busy?"disabled":""}>Hand to Claude</button>`}</div>
+    ${cell(r,F.t.notes) ? `<div class="notes">${linkify(cell(r,F.t.notes))}</div>` : ""}
+    <div class="notes" id="tm-${esc(id)}"></div>
+  </li>`;
+}
+function renderLanes(){
+  const el = $("lanes");
+  if (state.lanes == null) return;
+  const rows = [...state.lanes].sort((a,b) => (LANE_ORDER.indexOf(cell(a,F.l.lane))+99)%99 - (LANE_ORDER.indexOf(cell(b,F.l.lane))+99)%99);
+  if (!rows.length){ el.innerHTML = `<p class="note">No lanes yet.</p>`; return; }
+  const cls = h => ({"On track":"ok","Needs you":"warn","Blocked":"bad"}[h] || "");
+  el.innerHTML = rows.map(r => {
+    const lane = cell(r,F.l.lane), h = cell(r,F.l.health) || "Not started", id = r.id;
+    const tasks = laneTasks(lane);
+    const open = tasks.filter(t => cell(t,F.t.status) !== "Done").sort((a,b) => (["Blocked","Doing","Todo"].indexOf(cell(a,F.t.status)) - ["Blocked","Doing","Todo"].indexOf(cell(b,F.t.status))) || ((raw(a,F.t.order)??99) - (raw(b,F.t.order)??99)));
+    const done = tasks.filter(t => cell(t,F.t.status) === "Done");
+    const waiting = (state.queue||[]).filter(q => cell(q,F.q.lane) === lane && ["Needs approval","Approved","Changes requested"].includes(cell(q,F.q.status)));
+    const blocked = open.filter(t => cell(t,F.t.status) === "Blocked").length;
+    const agents = (state.agents||[]).filter(t => !t.run_once_at && laneOf(t.name) === lane);
+    const runs = (state.runs||[]).filter(x => RUN_LANE[cell(x,F.r.agent)] === lane);
+    const qDone = (state.queue||[]).filter(q => cell(q,F.q.lane) === lane && cell(q,F.q.status) === "Done");
+    const history = [
+      ...done.map(t => ({ d: cell(t,F.t.doneOn) || "", txt: cell(t,F.t.task), url: safeUrl(cell(t,F.t.link)) })),
+      ...runs.map(x => ({ d: cell(x,F.r.date), txt: `${cell(x,F.r.agent)} run (${cell(x,F.r.result)}): ${cell(x,F.r.summary)}` })),
+      ...qDone.map(q => ({ d: cell(q,F.q.created), txt: `Shipped: ${cell(q,F.q.item)}`, url: safeUrl(cell(q,F.q.link)) }))
+    ].sort((a,b) => String(b.d).localeCompare(String(a.d))).slice(0,15);
+    const links = LINKS[lane] || [];
+    const isOpen = state.openLanes.has(lane);
+    return `<details class="lane" data-lane="${esc(lane)}" ${isOpen ? "open" : ""}>
+      <summary>
+        <span class="led ${cls(h)}" title="${esc(h)}"></span>
+        <h4>${esc(lane)}</h4>
+        <span class="counts">${waiting.length ? `<span class="chip warn">${waiting.length} waiting</span>` : ""}${blocked ? `<span class="chip bad">${blocked} blocked</span>` : ""}<span class="chip">${open.length} to do</span><span class="caret">▸</span></span>
+        <span class="line">${esc(cell(r,F.l.status))}${cell(r,F.l.next) ? ` <b style="color:var(--ink)">Next: ${esc(cell(r,F.l.next))}</b>` : ""}</span>
+      </summary>
+      <div class="lane-body">
+        <div>
+          <h5>Next up</h5>
+          ${open.length ? `<ul class="tasks">${open.map(taskHtml).join("")}</ul>` : `<p class="note">Nothing queued. Add the next step below.</p>`}
+          <form class="addtask" data-add="${esc(lane)}" style="margin-top:8px">
+            <input type="text" name="t" placeholder="Add a task to ${esc(lane)}" aria-label="New task for ${esc(lane)}">
+            <select name="o" class="sm" aria-label="Owner"><option>Param</option><option>Agent</option><option>Script</option><option>Team</option></select>
+            <button class="sm" type="submit">Add</button>
+          </form>
+        </div>
+        <div>
+          <h5>What we did before</h5>
+          ${history.length ? `<ul class="history">${history.map(x => `<li><span class="d">${esc(fmtDate(x.d))}</span><span>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.txt)}</a>` : esc(x.txt)}</span></li>`).join("")}</ul>` : `<p class="note">No history yet.</p>`}
+        </div>
+        <div>
+          <h5>Waiting on you here</h5>
+          ${waiting.length ? waiting.map(q => `<div class="task" style="margin-bottom:6px"><div class="t">${esc(cell(q,F.q.item))}</div><div class="m">${esc(cell(q,F.q.status))}</div><div class="btns"><button class="sm" data-jump="${esc(q.id)}">Open</button></div></div>`).join("") : `<p class="note">Nothing to approve.</p>`}
+          <h5 style="margin-top:14px">Agents</h5>
+          ${agents.length ? agents.map(t => `<div class="mini-agent"><b>${esc(t.name)}</b><span class="note">${esc(humanCron(t.cron_expression))}</span>
+            <button class="sm switch${t.enabled ? " on" : ""}" data-agent="toggle" data-id="${esc(t.id)}" ${state.busy.has(t.id)?"disabled":""}><span class="dot"></span>${t.enabled ? "ON" : "OFF"}</button>
+            <button class="sm" data-agent="${state.arm === t.id ? "fire" : "arm"}" data-id="${esc(t.id)}" ${state.busy.has(t.id)?"disabled":""}>${state.arm === t.id ? "Confirm run" : "Run now"}</button></div>`).join("") : `<p class="note">No agent on this lane yet. Hand a task to Claude, or ask in a Param OS chat to set one up.</p>`}
+        </div>
+        <div>
+          <h5>Lane status</h5>
+          <div class="actions">
+            <select class="sm" data-health="${esc(id)}" aria-label="Health for ${esc(lane)}" ${state.busy.has(id)?"disabled":""}>${HEALTH.map(x => `<option ${x === h ? "selected" : ""}>${x}</option>`).join("")}</select>
+            <span class="note">updated ${esc(fmtDate(cell(r,F.l.updated)))}</span>
+          </div>
+          ${links.length ? `<h5 style="margin-top:14px">Links</h5><div class="links">${links.map(([t,u]) => `<a class="btn sm" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}</div>` : ""}
+          <div class="note" id="lm-${esc(id)}"></div>
+        </div>
+      </div>
+    </details>`;
+  }).join("");
+}
+
+/* ---------- Render: agents ---------- */
+function renderAgents(){
+  const el = $("agents");
+  if (state.agents == null) return;
+  const list = [...state.agents].filter(t => !t.run_once_at)
+    .sort((a,b) => (LANE_ORDER.indexOf(laneOf(a.name))+99)%99 - (LANE_ORDER.indexOf(laneOf(b.name))+99)%99 || String(a.name).localeCompare(String(b.name)));
+  const on = list.filter(t => t.enabled);
+  const weekly = on.reduce((s,t) => s + (runsPerWeek(t.cron_expression) || 0), 0);
+  const opus = on.filter(t => (t.derived_state?.model || "").includes("opus")).reduce((s,t) => s + (runsPerWeek(t.cron_expression) || 0), 0);
+  const failed = list.filter(t => t.last_run && /FAILED/.test(t.last_run.status||"")).length;
+  $("meter").innerHTML = `
+    <div class="tile"><span class="v">${on.length}/${list.length}</span><span class="k">agents switched on</span></div>
+    <div class="tile"><span class="v">${weekly}</span><span class="k">scheduled sessions a week</span></div>
+    <div class="tile"><span class="v">${opus}</span><span class="k">of those on Opus</span></div>
+    <div class="tile"><span class="v">${failed}</span><span class="k">last run failed</span></div>`;
+  if (!list.length){ el.innerHTML = `<div class="banner">No scheduled agents yet.</div>`; return; }
+  el.innerHTML = list.map(t => {
+    const id = t.id, busy = state.busy.has(id), c = parseCron(t.cron_expression);
+    const model = t.derived_state?.model || "", rpw = runsPerWeek(t.cron_expression), armed = state.arm === id;
+    const prompt = t.derived_state?.prompt || "";
+    return `<article class="agent${t.enabled ? "" : " off"}">
+      <div class="agent-top">
+        <div><div class="meta"><span class="chip lane">${esc(laneOf(t.name))}</span>${rpw != null ? `<span>${rpw}× a week</span>` : ""}</div><h3>${esc(t.name)}</h3></div>
+        <button class="switch${t.enabled ? " on" : ""}" role="switch" aria-checked="${t.enabled}" data-agent="toggle" data-id="${esc(id)}" ${busy?"disabled":""}><span class="dot"></span>${t.enabled ? "ON" : "OFF"}</button>
+      </div>
+      <dl class="kv">
+        <dt>When</dt><dd>${esc(humanCron(t.cron_expression))}</dd>
+        <dt>Next</dt><dd>${t.enabled && t.next_run_at ? esc(fmtWhen(t.next_run_at)) : '<span class="note">paused</span>'}</dd>
+        <dt>Last run</dt><dd>${lastRunChip(t)}</dd>
+      </dl>
+      <div class="actions">
+        ${c ? `<select aria-label="Days for ${esc(t.name)}" data-agent="days" data-id="${esc(id)}" ${busy?"disabled":""}>
+          ${PRESETS.some(p => p[0] === c.dow) ? "" : `<option value="" selected>${esc(c.dow)} (custom)</option>`}
+          ${PRESETS.map(p => `<option value="${p[0]}" ${p[0] === c.dow ? "selected" : ""}>${p[1]}</option>`).join("")}
+        </select>` : ""}
+        <select aria-label="Model for ${esc(t.name)}" data-agent="model" data-id="${esc(id)}" ${busy?"disabled":""}>
+          ${MODELS.some(m => m[0] === model) ? "" : `<option value="" selected>${esc(model || "default")}</option>`}
+          ${MODELS.map(m => `<option value="${m[0]}" ${m[0] === model ? "selected" : ""}>${m[1]}</option>`).join("")}
+        </select>
+        ${armed ? `<button class="danger" data-agent="fire" data-id="${esc(id)}" ${busy?"disabled":""}>Confirm: run now</button><button data-agent="disarm" data-id="${esc(id)}">Cancel</button>`
+                : `<button data-agent="arm" data-id="${esc(id)}" ${busy?"disabled":""}>Run once now</button>`}
+      </div>
+      <div class="note" id="am-${esc(id)}">${armed ? "This starts one full agent session and uses your Claude usage." : ""}</div>
+      ${prompt ? `<details class="prompt"><summary>What this agent does</summary><pre>${esc(prompt)}</pre></details>` : ""}
+    </article>`;
+  }).join("");
+  stampHeader();
+}
+
+/* ---------- Render: numbers + runs ---------- */
+function renderTiles(){
+  const el = $("tiles"); if (state.metrics == null) return;
+  const cutoff = new Date(Date.now() - 7*864e5).toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});
+  const sums = {};
+  state.metrics.forEach(r => { const d = cell(r,F.m.date); if (!d || d < cutoff) return; const k = cell(r,F.m.metric); sums[k] = sums[k] || { v:0, lane: cell(r,F.m.lane) }; sums[k].v += Number(raw(r,F.m.value)) || 0; });
+  const doneWeek = (state.tasks||[]).filter(t => cell(t,F.t.status) === "Done" && (cell(t,F.t.doneOn)||"") >= cutoff).length;
+  const keys = Object.keys(sums);
+  el.innerHTML = `<div class="tile"><span class="v">${doneWeek}</span><span class="k">tasks done · all lanes</span></div>` +
+    keys.map(k => `<div class="tile"><span class="v">${esc(Math.round(sums[k].v*100)/100)}</span><span class="k">${esc(k)} · ${esc(sums[k].lane)}</span></div>`).join("");
+}
+function renderRuns(){
+  const el = $("runs"); if (state.runs == null) return;
+  const rows = [...state.runs].sort((a,b) => String(cell(b,F.r.date)).localeCompare(String(cell(a,F.r.date)))).slice(0,15);
+  if (!rows.length){ el.innerHTML = `<div class="banner">No runs logged yet. Agents write one row here each time they finish.</div>`; return; }
+  el.innerHTML = `<div class="tablebox"><table><thead><tr><th>Date</th><th>Agent</th><th>Result</th><th>What happened</th><th>Made</th></tr></thead><tbody>${
+    rows.map(r => `<tr><td class="date">${esc(fmtDate(cell(r,F.r.date)))}</td><td>${esc(cell(r,F.r.agent))}</td><td><span class="res ${esc(cell(r,F.r.result))}">${esc(cell(r,F.r.result))}</span></td><td>${esc(cell(r,F.r.summary))}</td><td class="num">${esc(raw(r,F.r.items) ?? "")}</td></tr>`).join("")
+  }</tbody></table></div>`;
+}
+
+/* ---------- Actions ---------- */
+function ambiguous(e){ return e?.code === "server_unavailable" || e?.code === "upstream_error"; }
+async function writeAT(table, records, busyId, msgId, onOk){
+  if (busyId) state.busy.add(busyId);
+  renderAll();
+  try {
+    const r = await mcp.callTool(AT, records[0].id ? "update_records_for_table" : "create_records_for_table", { baseId: BASE, tableId: table, typecast: true, records });
+    if (busyId) state.busy.delete(busyId);
+    onOk && onOk(r);
+    renderAll();
+    await refreshAT();
+    return true;
+  } catch(e){
+    if (busyId) state.busy.delete(busyId);
+    renderAll();
+    const m = $(msgId); if (m) m.textContent = ambiguous(e) ? "Not sure that saved. Hit Refresh to check before trying again." : errorCopy(e, AT);
+    return false;
+  }
+}
+function patchLocal(list, id, fields){ const rec = (list||[]).find(r => r.id === id); if (rec) Object.assign(rec.cellValuesByFieldId, fields); }
+
+function setQueue(id, status, notes){
+  const fields = { [F.q.status]: status }; if (notes != null) fields[F.q.notes] = notes;
+  writeAT(T.queue, [{ id, fields }], id, "msg-"+id, () => { patchLocal(state.queue, id, fields); state.openNote = null; });
+}
+function setTask(id, status){
+  const fields = { [F.t.status]: status, [F.t.doneOn]: status === "Done" ? todayISO() : null };
+  writeAT(T.tasks, [{ id, fields }], id, "tm-"+id, () => patchLocal(state.tasks, id, fields));
+}
+async function addTask(lane, text, owner){
+  const fields = { [F.t.task]: text, [F.t.lane]: lane, [F.t.status]: "Todo", [F.t.owner]: owner };
+  state.openLanes.add(lane);
+  return writeAT(T.tasks, [{ fields }], null, "lm-" + ((state.lanes||[]).find(r => cell(r,F.l.lane) === lane)?.id || ""), r => {
+    const rec = r?.payload?.records?.[0]; if (rec) (state.tasks ||= []).push(rec);
+  });
+}
+function setHealth(id, health){
+  const fields = { [F.l.health]: health, [F.l.updated]: todayISO() };
+  writeAT(T.lanes, [{ id, fields }], id, "lm-"+id, () => patchLocal(state.lanes, id, fields));
+}
+
+async function agentAction(id, input, okMsg){
+  state.busy.add(id); renderAgents(); renderLanes();
+  try {
+    await mcp.callTool(CCR, "update_trigger", Object.assign({ trigger_id: id }, input));
+    state.busy.delete(id);
+    await refreshAgents();
+    const m = $("am-"+id); if (m) m.textContent = okMsg;
+  } catch(e){
+    state.busy.delete(id); renderAgents(); renderLanes();
+    const m = $("am-"+id); if (m) m.textContent = ambiguous(e) ? "Not sure that saved. Reload to check before trying again." : errorCopy(e, CCR);
+  }
+}
+async function fireAgent(id, text, msgId){
+  state.busy.add(id); state.arm = null; renderAgents(); renderLanes();
+  try {
+    await mcp.callTool(CCR, "fire_trigger", text ? { trigger_id: id, text } : { trigger_id: id });
+    state.busy.delete(id); renderAgents(); renderLanes();
+    const m = $(msgId || "am-"+id); if (m) m.textContent = "Started. Results land in the queue, the lane and the run log when it finishes.";
+    setTimeout(() => refreshAgents(), 20000);
+    return true;
+  } catch(e){
+    state.busy.delete(id); renderAgents(); renderLanes();
+    const m = $(msgId || "am-"+id); if (m) m.textContent = ambiguous(e) ? "Not sure it started. Check the last run time in a minute before trying again." : errorCopy(e, CCR);
+    return false;
+  }
+}
+async function handToClaude(kind, rec, msgId){
+  const w = worker();
+  const m = $(msgId);
+  if (!w){ if (m) m.textContent = "The worker agent isn't set up yet. Ask Claude in a Param OS chat to create the \"Param OS worker\" scheduled task, then this button runs it."; return; }
+  let text;
+  if (kind === "task"){
+    text = `Task record ${rec.id} in lane "${cell(rec,F.t.lane)}": ${cell(rec,F.t.task)}${cell(rec,F.t.notes) ? "\nNotes: " + cell(rec,F.t.notes) : ""}${cell(rec,F.t.link) ? "\nLink: " + cell(rec,F.t.link) : ""}`;
+    const ok = await fireAgent(w.id, text, msgId);
+    if (ok) writeAT(T.tasks, [{ id: rec.id, fields: { [F.t.status]: "Doing", [F.t.owner]: "Agent" } }], null, msgId, () => patchLocal(state.tasks, rec.id, { [F.t.status]: "Doing", [F.t.owner]: "Agent" }));
+  } else {
+    text = `Queue item ${rec.id} in lane "${cell(rec,F.q.lane)}" (${cell(rec,F.q.status)}): ${cell(rec,F.q.item)}\nSend to: ${cell(rec,F.q.sendto) || "not set"}\nWho I know: ${cell(rec,F.q.know) || "not set"}\nDraft: ${cell(rec,F.q.draft) || "none"}\nSummary: ${cell(rec,F.q.summary)}\nDo: find the best contact and email if missing, fill Send to and Who I know, put the email in the Gmail draft's To field, and add a Task for Param with the exact next action. Do not send anything.`;
+    await fireAgent(w.id, text, msgId);
+  }
+}
+
+document.addEventListener("toggle", ev => {
+  const d = ev.target; if (!d.matches || !d.matches("details.lane")) return;
+  d.open ? state.openLanes.add(d.dataset.lane) : state.openLanes.delete(d.dataset.lane);
+}, true);
+
+document.addEventListener("submit", async ev => {
+  const f = ev.target.closest("form[data-add]"); if (!f) return;
+  ev.preventDefault(); if (!mcp) return;
+  const text = f.t.value.trim(); if (!text) return;
+  const ok = await addTask(f.dataset.add, text, f.o.value);
+  if (ok) f.reset();
+});
+
+document.addEventListener("click", ev => {
+  const ap = ev.target.closest("[data-approve]");
+  if (ap && mcp){ ap.dataset.approve === "at" ? loadATOnce() : loadAgentsOnce(); return; }
+  const more = ev.target.closest("[data-more]");
+  if (more){ const s = $("s-"+more.dataset.more); if (s){ s.classList.toggle("open"); more.textContent = s.classList.contains("open") ? "Show less" : "Show all"; } return; }
+  const jump = ev.target.closest("[data-jump]");
+  if (jump){ const c = $("card-"+jump.dataset.jump); if (c){ c.scrollIntoView({ behavior:"smooth", block:"center" }); c.classList.add("flash"); setTimeout(() => c.classList.remove("flash"), 1600); } return; }
+  if (!mcp) return;
+  const ag = ev.target.closest("button[data-agent]");
+  if (ag && !ag.disabled){
+    ev.preventDefault();
+    const id = ag.dataset.id, t = (state.agents||[]).find(x => x.id === id);
+    if (ag.dataset.agent === "toggle" && t) agentAction(id, { enabled: !t.enabled }, t.enabled ? "Paused." : "Switched on. It runs at the next scheduled time.");
+    if (ag.dataset.agent === "arm"){ state.arm = id; renderAgents(); renderLanes(); }
+    if (ag.dataset.agent === "disarm"){ state.arm = null; renderAgents(); renderLanes(); }
+    if (ag.dataset.agent === "fire") fireAgent(id);
+    return;
+  }
+  const tb = ev.target.closest("button[data-task]");
+  if (tb && !tb.disabled){
+    ev.preventDefault();
+    const id = tb.dataset.id, rec = (state.tasks||[]).find(r => r.id === id); if (!rec) return;
+    const a = tb.dataset.task;
+    if (a === "done") setTask(id, "Done");
+    if (a === "doing") setTask(id, "Doing");
+    if (a === "blocked") setTask(id, "Blocked");
+    if (a === "reopen") setTask(id, "Todo");
+    if (a === "hand") handToClaude("task", rec, "tm-"+id);
+    return;
+  }
+  const b = ev.target.closest("button[data-act]"); if (!b || b.disabled) return;
+  const id = b.dataset.id, rec = (state.queue||[]).find(r => r.id === id);
+  const a = b.dataset.act;
+  if (a === "approve") setQueue(id, "Approved");
+  if (a === "skip") setQueue(id, "Skipped");
+  if (a === "done"){ setQueue(id, "Done"); if (rec) writeAT(T.tasks, [{ fields: { [F.t.task]: (cell(rec,F.q.lane) === "Jobs" ? "Sent: " : "Done: ") + cell(rec,F.q.item), [F.t.lane]: cell(rec,F.q.lane), [F.t.status]: "Done", [F.t.owner]: "Param", [F.t.doneOn]: todayISO(), [F.t.link]: cell(rec,F.q.draft) || cell(rec,F.q.link) || null } }], null, "msg-"+id, r => { const n = r?.payload?.records?.[0]; if (n) (state.tasks ||= []).push(n); }); }
+  if (a === "handq" && rec) handToClaude("queue", rec, "msg-"+id);
+  if (a === "note"){ state.openNote = id; renderQueue(); const t = $("n-"+id); if (t) t.focus(); }
+  if (a === "cancel"){ state.openNote = null; renderQueue(); }
+  if (a === "send"){
+    const t = $("n-"+id); const v = (t?.value || "").trim();
+    if (!v){ const m = $("msg-"+id); if (m) m.textContent = "Write a note first so the agent knows what to change."; return; }
+    setQueue(id, "Changes requested", v);
+  }
+});
+document.addEventListener("change", ev => {
+  if (!mcp) return;
+  const h = ev.target.closest("select[data-health]");
+  if (h){ setHealth(h.dataset.health, h.value); return; }
+  const s = ev.target.closest("select[data-agent]"); if (!s || !s.value) return;
+  const id = s.dataset.id, t = (state.agents||[]).find(x => x.id === id); if (!t) return;
+  if (s.dataset.agent === "model") agentAction(id, { model: s.value }, "Model changed. Applies from the next run.");
+  if (s.dataset.agent === "days"){ const cron = withDow(t.cron_expression, s.value); if (cron) agentAction(id, { cron_expression: cron }, "Schedule changed."); }
+});
+
+loadMM();
+(async () => {
+  try { mcp = await window.claude?.use?.("mcp"); } catch(_){ mcp = null; }
+  if (!mcp){
+    const el = $("pagemsg"); el.hidden = false;
+    el.innerHTML = `<div class="banner err">Live data loads when this page is opened in claude.ai with your Airtable and Claude Code Remote connectors. Open it from your artifacts there.</div>`;
+    ["queue","agents","lanes","tiles","runs"].forEach(id => $(id).innerHTML = "");
+    $("sub").innerHTML = "<span>offline view</span>";
+    return;
+  }
+  watchAT("queue", BASE, T.queue);
+  watchAT("lanes", BASE, T.lanes);
+  watchAT("tasks", BASE, T.tasks, 200);
+  watchAT("runs", BASE, T.runs);
+  watchAT("metrics", BASE, T.metrics);
+  watchAT("people", JOBS, PEOPLE, 200);
+  watchAT("questions", JOBS, QUESTIONS, 200);
+  watchAgents();
+})();
+</script>
