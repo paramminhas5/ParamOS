@@ -2,5 +2,7 @@
   "headers": [
     { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] },
     { "source": "/app/sw.js", "headers": [ { "key": "Service-Worker-Allowed", "value": "/paramos" }, { "key": "Cache-Control", "value": "no-cache" } ] }
-  ]
+  ],
+  "functions": { "api/job-boards.js": { "maxDuration": 60 } },
+  "crons": [ { "path": "/api/job-boards", "schedule": "45 1 * * *" } ]
 }
